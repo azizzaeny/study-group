@@ -88,7 +88,7 @@ Users or a member can have multiple method to login (from emails and phone numbe
 
 There are only admin and members type of users roles in these application. an admin can manage all of the data and the members can only manage their own data.  
 
-The Password stored as bcrypt encriptions and only checked with reverse matching matching method, meaning there is no re-decode back to original values.  
+The Password stored as bcrypt encryptions and only checked with reverse matching matching method, meaning there is no re-decode back to original values.  
 
 The authentication mechanism using JWT and stored in clientside local-storage, the users will ask for API auth/, the sender should send request contain 'Basic authentication' with id and password delivered in headers, if it match system would generate a user token with limited amount of time that can be use to authorize the request data.  
 
@@ -103,6 +103,7 @@ An active member can create a study which everyone can see (publicly) or private
 As for admin, the menu will contain all of the listing entities of the system. an admin also have limited capability, they cannot modify active chapter inside a study-group that already published. each modify by an admin there should be a log of changes and reason of changes.
 
 There would be a list of users/members and list of study, only admin would have both, users can only allowed to modify their own profile and their own study not others.
+
 
 
 **Requirements**  
@@ -125,4 +126,4 @@ There would be a list of users/members and list of study, only admin would have 
 - CRUD for chapter,
 - CRUD for contents
 
-see: [docs/](docs/)   
+
