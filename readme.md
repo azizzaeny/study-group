@@ -1,12 +1,14 @@
 
-**What is this project About?**  
-> This project is about learning the concept of MANEST (Mongo, Angular, Nest, Typescript), we will go through all of the concept by applying it in real cases of study-group.  
+**What is the project About?**  
+
+This project is about learning the concept of MANEST (Mongo, Angular, Nest, Typescript), we will go through all of the concept by applying it in real cases of study-group.  
 
 **What is study group?**  
-> Study group is online collaborating web application where members can create a course/study publicly or privately. when a study created privately the author of the study can share and allow certain member to see the study.   
+
+Study group is online collaborating web application where members can create a course/study publicly or privately. when a study created privately the author of the study can share and allow certain member to see the study.     
  
 **The challange**  
-- Our task is to get familliarize with bellow concept. 
+Our task is to get familliarize with bellow concept.   
   - local setup (angular, nest, mongo)
   - CLI (angular, nest),
   - routing & navigation (angular)
@@ -25,9 +27,9 @@
   - use different environment variables (angular, nest, mongod)
   - testing method (angular, nest, mongod)
   - build generate method, (angular, nest)
-  - deployement method, (angular, nest, mongod)
+  - deployement method, (angular, nest, mongod)  
 
-- Next priority is to built application that have these concept. 
+Next priority is to built application that have these concept.   
   - login JWT
   - register 
   - forgot password.
@@ -50,4 +52,7 @@ Instructions
 User
 Auth
 
+**Use Cases**  
+
+**Requirements**  
 see: [docs/](docs/) for further imformation.
