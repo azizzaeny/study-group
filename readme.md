@@ -46,13 +46,45 @@ Next priority is to built application that have these concept.
 **System Design**  
 
 **Domain Model**  
-Study
-Chapter
-Instructions
-User
-Auth
+```
+user/id
+user/full_name
+user/created_at,
+user/status
+user/phones
+user/email
 
+auth/id,
+auth/method
+auth/roles
+auth/primary_id,
+auth/password
+auth/resetoken,
+
+study/id  
+study/title  
+study/descriptions  
+study/status [draft, published]  
+study/is_active  
+study/is_public  
+study/members  
+study/created_at  
+study/last_commit  
+
+chapter/id 
+chapter/title
+chapter/index
+chapter/study_id
+chapter/created_at
+
+content/id,
+content/raw_data,
+content/asset_path,
+content/chapter_id
+```
 **Use Cases**  
 
 **Requirements**  
-see: [docs/](docs/) for further imformation.
+
+
+see: [docs/](docs/)   
