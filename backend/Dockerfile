@@ -9,8 +9,6 @@ RUN npm install && \
 
 FROM node:14.13-alpine
 COPY --from=build /src/tsconfig.json /opt/app/tsconfig.json
-COPY --from=build /src/tslint.json /opt/app/tslint.json
-COPY --from=build /src/config /opt/app/config
 COPY --from=build /src/dist /opt/app
 COPY --from=build /src/node_modules /opt/app/node_modules
 
