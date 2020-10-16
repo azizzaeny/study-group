@@ -36,3 +36,4 @@ backend/typings/
 backend/._*
 backend/docker-compose.yml
 
+docs/research.md
