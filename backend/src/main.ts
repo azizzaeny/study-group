@@ -3,7 +3,7 @@ import * as helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
 import { environment } from './environments/environment';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from './components/pipes/validation.pipe';
 import { TimeoutInterceptor } from './components/interceptors/timeout.interceptor';
 import { HttpExceptionFilter } from './components/filters/http-exception.filter';
 import { debugRequest } from './components/middleware/debug.middleware';
@@ -20,10 +20,7 @@ async function bootstrapHttp() {
     (!environment.production) && app.use(debugRequest);
     app.useGlobalFilters(new HttpExceptionFilter());
     app.useGlobalInterceptors(new TimeoutInterceptor());
-    app.useGlobalPipes(
-        new ValidationPipe({
-            transform: true
-        }));
+    app.useGlobalPipes(new ValidationPipe());
 
     //app.enableCors({ credentials: true });
 
