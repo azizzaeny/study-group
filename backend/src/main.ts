@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { TimeoutInterceptor } from 'components/interceptor/timeout.interceptor';
+import { TimeoutInterceptor } from 'components/interceptors/timeout.interceptor';
 import { HttpExceptionFilter } from 'components/filters/http-exception.filter';
 
 
