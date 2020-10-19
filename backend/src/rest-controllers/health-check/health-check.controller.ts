@@ -1,6 +1,6 @@
 import { Get, Controller } from '@nestjs/common';
 
-@Controller('health-check')
+@Controller('api')
 export class HealthCheckController {
     private upTime: number;
     constructor() {
