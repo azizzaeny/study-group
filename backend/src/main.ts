@@ -1,19 +1,25 @@
+import * as bodyParser from 'body-parser';
+import * as helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
+import { environment } from './environments/environment';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-//import { TimeoutInterceptor } from 'components/interceptors/timeout.interceptor';
+import { TimeoutInterceptor } from './components/interceptors/timeout.interceptor';
 import { HttpExceptionFilter } from './components/filters/http-exception.filter';
-
+import { debugRequest } from './components/middleware/debug.middleware';
 
 async function bootstrapHttp() {
     const app = await NestFactory.create(AppModule, {
         cors: true,
     });
 
+    app.use(bodyParser.urlencoded());
+    app.use(helmet());
     app.enableShutdownHooks();
     //app.useLogger
+    (!environment.production) && app.use(debugRequest);
     app.useGlobalFilters(new HttpExceptionFilter());
-    // app.useGlobalInterceptors(new TimeoutInterceptor());
+    app.useGlobalInterceptors(new TimeoutInterceptor());
     app.useGlobalPipes(
         new ValidationPipe({
             transform: true
