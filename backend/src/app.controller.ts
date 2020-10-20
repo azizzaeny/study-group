@@ -1,16 +1,15 @@
 import { Get, Controller } from '@nestjs/common';
-import { docs_referer } from './core/return';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-    constructor() { }
-    @Get()
-    root(): { message: string, link: string } {
-        return docs_referer();
-    };
-
-    @Get('api')
-    rootApi(): { message: string, link: string } {
-        return docs_referer();
-    }
+  constructor(private readonly appService: AppService) { }
+  @Get()
+  root() {
+    return this.appService.root();
+  }
+  @Get('api')
+  getApi() {
+    return this.appService.root();
+  }
 }
