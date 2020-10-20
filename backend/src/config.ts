@@ -4,12 +4,12 @@ export default () => ({
     port: process.env.http_port || 3000
   },
   db: {
-    host: "",
+    host: "127.0.0.1",
     port: "27017",
-    user: "",
-    pass: "",
-    database: "",
-    authSource: ""
+    user: null,
+    pass: null,
+    database: "study-group-db",
+    authSource: null
   },
   mail: {
     host: "<smtp-host>",
