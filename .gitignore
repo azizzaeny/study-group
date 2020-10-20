@@ -1,4 +1,6 @@
 dist/
+bin/mongodb*
+
 node_modules/
 
 frontend/node_modules/
