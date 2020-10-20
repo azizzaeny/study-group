@@ -1,39 +1,19 @@
-import * as bodyParser from 'body-parser';
-import * as helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
-import { environment } from './environments/environment';
-import { AppModule } from './app.module';
-import { ValidationPipe } from './components/pipes/validation.pipe';
-import { TimeoutInterceptor } from './components/interceptors/timeout.interceptor';
-import { HttpExceptionFilter } from './components/filters/http-exception.filter';
-import { debugRequest } from './components/middleware/debug.middleware';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
-async function bootstrapHttp() {
-    const app = await NestFactory.create(AppModule, {
-        cors: true,
-    });
 
-    app.use(bodyParser.urlencoded());
-    app.use(helmet());
-    app.enableShutdownHooks();
-    //app.useLogger
-    (!environment.production) && app.use(debugRequest);
-    app.useGlobalFilters(new HttpExceptionFilter());
-    app.useGlobalInterceptors(new TimeoutInterceptor());
-    app.useGlobalPipes(new ValidationPipe());
+import { AppModule } from './app.module'
+import config from './config';
 
-    //app.enableCors({ credentials: true });
+const conf = config();
 
-    //app.setGlobalPrefix('api');
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  await app.listen(conf.http.port);
 
-    await app.listen(3000);
-    console.log('Http server up and running on port 3000')
-    return app;
+  console.log('Http Application started at port ', conf.http.port);
+
+  return app;
 }
 
-async function bootstrapServices() { }
-
-bootstrapHttp();
-bootstrapServices();
-
-
+const server = bootstrap();
