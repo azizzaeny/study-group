@@ -39,6 +39,22 @@ export class UserDto {
   readonly password: string;
 }
 
+export const user_response = (user) => {
+  return user;
+}
+
+export class UserResponseDto {
+  full_name: string;
+  email: string;
+  phone: string;
+  constructor(user) {
+    this.full_name = user.full_name;
+    this.phone = user.phone;
+    this.email = user.email;
+  }
+}
+
+// TODO: UserResponseFullDto
 
 export const user_schema = () => {
   return {
