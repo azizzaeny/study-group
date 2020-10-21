@@ -23,12 +23,12 @@ export const auth_schema = () => ({
 });
 
 
-export function create_auth(auth: UserDto, options?: any)
+export function create_auth(auth: UserDto, options: any)
   : IUserAuth {
   return {
     auth: {
       email: auth.email,
-      password: auth.password,
+      password: options.password,
       resetoken: options.token || '',
       roles: options.roles || ['member'],
       method: options.method || 'email',
