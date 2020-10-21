@@ -12,7 +12,7 @@ export class AuthService {
     return await bcrypt.hash(pass, rounds);
   }
 
-  async sentEmailVerification(email): Promise<boolean> {
+  async sentEmailVerification(email: string): Promise<boolean> {
     return true;
   }
 
