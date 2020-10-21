@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcryptjs';
 import { UserDto, IUserAuth, IUserRegistered } from './user';
 
 export type AuthMethod = 'email' | 'phone';
@@ -53,4 +54,8 @@ export function is_valid_email(email: string)
   } else {
     return false;
   }
+}
+
+export async function generatePassword(password: string, rounds: number) {
+  return bcrypt.hash(password, rounds);
 }
