@@ -3,15 +3,21 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { UserSchema } from './user.interface';
-import { user_feature } from './../../domain/user';
+import { AuthService } from './../auth/auth.service';
 
-const mongooseFeature = MongooseModule.forFeature(user_feature(UserSchema));
+import { UserSchema } from './user.interface';
+import { AuthSchema } from './../auth/auth.interface';
+import { feature } from './../../domain/util';
+
+const mongooseFeature = MongooseModule.forFeature([
+  feature('User', UserSchema),
+  feature('Auth', AuthSchema)
+]);
 
 @Module({
   imports: [mongooseFeature],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService, AuthService]
 })
 export class UserModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) { }
