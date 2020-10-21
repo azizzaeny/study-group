@@ -2,6 +2,8 @@ import {
   Controller,
   Get,
   Post,
+  Put,
+  Delete,
   Body,
   HttpCode,
   HttpStatus,
@@ -24,7 +26,18 @@ export class UserController {
     private readonly authService: AuthService
   ) { }
 
-  @Get(':email')
+  @Get()
+  async getAllUsers() {
+    return await this.userService.findAll();
+  }
+
+  @Get('id/:id')
+  async getUserById(@Param() params): Promise<IResponse> {
+    let user = await this.userService.findById(params.id);
+    return user;
+  }
+
+  @Get('email/:email')
   async getUserByEmail(@Param() params): Promise<IResponse> {
     try {
       let user = await this.userService.findByEmail(params.email);
@@ -34,7 +47,39 @@ export class UserController {
     };
   }
 
-  @Post('register')
+  @Get('profile/:email')
+  async getUserProfile(@Param() params): Promise<any> {
+    return {
+      profile: await this.userService.findByEmail(params.email),
+      auth: await this.authService.findByEmail(params.email)
+    }
+  }
+
+  // TODO: this upsert is not correct way to updating
+  @Post('upsert')
+  @HttpCode(HttpStatus.OK)
+  async updateUser(@Body() userDto: UserDto) {
+    return await this.userService.upsertByEmail(userDto);
+  }
+
+  @Put('update')
+  @HttpCode(HttpStatus.OK)
+  async putUpdateUser() { }
+
+
+  @Post('delete/:email')
+  @HttpCode(HttpStatus.OK)
+  async postDeleteByEmail(@Param() params): Promise<IResponse> {
+    let user = await this.userService.deleteByEmail(params.email);
+    let auth = await this.authService.deleteByEmail(params.email);
+    if (user && auth) {
+      return new ResponseSuccess('USER.REMOVED');
+    } else {
+      return new ResponseSuccess('OK');
+    }
+  }
+
+  @Post('create')
   @HttpCode(HttpStatus.OK)
   async register(@Body() userDto: UserDto): Promise<IResponse> {
     try {
@@ -45,10 +90,9 @@ export class UserController {
       } else {
         return new ResponseError('USER.REGISTRATION_ERROR_EMAIL_NOT_SENT');
       }
-
     } catch (error) {
       return new ResponseError('USER.REGISTRATION.ERROR_GENERIC', error);
     }
-
   }
+
 }

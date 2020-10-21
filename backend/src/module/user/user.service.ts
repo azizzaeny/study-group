@@ -37,6 +37,26 @@ export class UserService {
     return (await this.userModel.findOne({ email: email }).exec())
   }
 
+  async findAll(): Promise<any> {
+    return await this.userModel.find({}).exec();
+  }
+
+  async findById(id: any): Promise<any> {
+    return await this.userModel.findById(id).exec()
+  }
+
+  async updateById(id, user): Promise<any> {
+    return await this.userModel.findByIdAndUpdate(id, user);
+  }
+
+  async upsertByEmail(user): Promise<any> {
+    return await this.userModel.findOneAndUpdate({ email: user.email }, user, { new: true, upsert: true });
+  }
+
+  async deleteByEmail(email: any): Promise<any> {
+    return await this.userModel.findOneAndDelete({ email: email });
+  }
+
   async registerUser(user: UserDto) {
 
     if (is_valid_email(user.email) && user.password) {
