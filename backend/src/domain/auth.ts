@@ -17,7 +17,7 @@ export const auth_schema = () => ({
   email: String,
   password: String,
   resetoken: { type: String, default: '' },
-  roles: [Array],
+  roles: Array,
   method: { type: String, default: 'email' },
   valid_email: { type: Boolean, default: false },
   last_updated: Date
@@ -37,11 +37,6 @@ export function create_auth(auth: UserDto, options: any)
       last_updated: new Date()
     }
   }
-}
-
-export function register_user(profile: any, auth: any, img_profile?: any | {})
-  : IUserRegistered {
-  return Object.assign({}, profile, auth, img_profile);
 }
 
 export const saltRounds = 10;
