@@ -3,8 +3,9 @@ FROM node:14.13-alpine as build
 
 COPY . /src
 WORKDIR /src
-RUN npm install && \
-    npm cache clean --force
+
+#RUN npm install && \
+#    npm cache clean --force
 
 
 FROM node:14.13-alpine
