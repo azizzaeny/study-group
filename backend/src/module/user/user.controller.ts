@@ -28,13 +28,14 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   async register(@Body() userDto: UserDto): Promise<IResponse> {
     try {
-      let created : IUserRegistered = await this.userService.registerUser(userDto);
-      let sentEmail = await this.authService.sentEmailVerification(created.profile.email);
-      if (created && sentEmail) {
-	return new ResponseSuccess('USER.REGISTRATION_SUCCESS');
+      await this.userService.registerUser(userDto);
+      let sentEmail = await this.authService.sentEmailVerification('');
+      if (sentEmail) {
+        return new ResponseSuccess('USER.REGISTRATION_SUCCESS');
       } else {
-	return new ResponseError('USER.REGISTRATION_ERROR_EMAIL_NOT_SENT');
+        return new ResponseError('USER.REGISTRATION_ERROR_EMAIL_NOT_SENT');
       }
+
     } catch (error) {
       return new ResponseError('USER.REGISTRATION.ERROR_GENERIC', error);
     }

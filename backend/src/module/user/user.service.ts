@@ -39,33 +39,38 @@ export class UserService {
     return (await this.authModel.findOne({ email: email }).exec())
   }
 
-  async registerUser(user: UserDto): Promise<IUserRegistered> {
+  async registerUser(user: UserDto) {
 
     if (is_valid_email(user.email) && user.password) {
       let user_exists = await this.findByEmail(user.email);
-
       if (!user_exists) {
         let new_password = await generatePassword(user.password, saltRounds);
-        let user_profile: IUserProfile = create_user(user);
-        let auth_meta: IUserAuth = create_auth(user);
+        let user_profile: IUserProfile = create_user(user, {});
+        let auth_meta: IUserAuth = create_auth(user, { password: new_password });
         let created_user: IUserRegistered = register_user(user_profile, auth_meta);
+
+        // console.log(created_user);
+
         let new_user = new this.userModel(created_user.profile);
         let new_auth = new this.authModel(created_user.auth);
 
-	await new_user.save();
-	await new_auth.save();
+        await new_user.save();
+        await new_auth.save();
 
-	return created_user;
+        return created_user;
+
       } else {
-	if(!user_exists.valid_email){
-	  throw new HttpException('USER.REGISTRATION_COMPLETE_REGISTRATION_EMAIL', HttpStatus.FORBIDDEN);
-	}else{
-          throw new HttpException('USER.REGISTRATION_ALREADY_EXISTS',HttpStatus.FORBIDDEN);
-	}
+        if (user_exists.valid_email) {
+          throw new HttpException('USER.REGISTRATION_ALREADY_EXISTS', HttpStatus.FORBIDDEN);
+        } else {
+          throw new HttpException('USER.REGISTRATION_COMPLETE_REGISTRATION_EMAIL', HttpStatus.FORBIDDEN);
+        }
       }
-  } else {
+    } else {
       throw new HttpException('USER.REGISTRATION_MISSING_REQUIRED_FIELDS', HttpStatus.FORBIDDEN);
+
     }
+
 
   }
 }
