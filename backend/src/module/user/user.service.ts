@@ -1,7 +1,6 @@
 
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 
-import * as bcrypt from 'bcryptjs';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -11,7 +10,8 @@ import { IAuthDocument } from './../auth/auth.interface';
 import {
   saltRounds,
   is_valid_email,
-  create_auth
+  create_auth,
+  generatePassword
 } from './../../domain/auth';
 
 import {
@@ -24,32 +24,31 @@ import {
 } from './../../domain/user';
 
 
-export async function generatePassword(password: string, rounds: number) {
-  return bcrypt.hash(password, rounds);
-}
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<IUserDocument>,
     @InjectModel('Auth') private readonly authModel: Model<IAuthDocument>
+
   ) { }
 
-  async findByEmail(email: string): Promise<IAuthDocument> {
-    return (await this.authModel.findOne({ email: email }).exec())
+  async findByEmail(email: string): Promise<IUserDocument> {
+    return (await this.userModel.findOne({ email: email }).exec())
   }
 
   async registerUser(user: UserDto) {
 
     if (is_valid_email(user.email) && user.password) {
-      let user_exists = await this.findByEmail(user.email);
+      let user_exists = await this.authModel.findOne({ email: user.email }).exec();
+
       if (!user_exists) {
         let new_password = await generatePassword(user.password, saltRounds);
         let user_profile: IUserProfile = create_user(user, {});
         let auth_meta: IUserAuth = create_auth(user, { password: new_password });
         let created_user: IUserRegistered = register_user(user_profile, auth_meta);
 
-        // console.log(created_user);
+        console.log(created_user);
 
         let new_user = new this.userModel(created_user.profile);
         let new_auth = new this.authModel(created_user.auth);
