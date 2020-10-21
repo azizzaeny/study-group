@@ -9,6 +9,8 @@ import { UserSchema } from './user.interface';
 import { AuthSchema } from './../auth/auth.interface';
 import { feature } from './../../domain/util';
 
+import { LoggerMiddleware } from './../../common/middlewares/logger.middleware';
+
 const mongooseFeature = MongooseModule.forFeature([
   feature('User', UserSchema),
   feature('Auth', AuthSchema)
@@ -20,5 +22,7 @@ const mongooseFeature = MongooseModule.forFeature([
   providers: [UserService, AuthService]
 })
 export class UserModule implements NestModule {
-  public configure(consumer: MiddlewareConsumer) { }
+  public configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes(UserController);
+  }
 }
