@@ -1,18 +1,5 @@
 version: '3.1'
 services:
-  nginx:
-    container_name: nginx-angular
-    image: nginx-angular
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - nest
-    networks:
-      - study-group-network
 
   nest:
     container_name: nest-server
@@ -34,19 +21,6 @@ services:
     image: mongo
     ports:
       - "27017:27017"
-    networks:
-      - study-group-network
-
-  cadvisor:
-    container_name: cadvisor
-    image: google/cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - "8000:8000"
     networks:
       - study-group-network
 
