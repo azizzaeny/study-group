@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { refer_docs, IHttpMessage } from './domain/http-message';
+import { refer_docs, IHttpMessage } from 'src/api/rest/response/http-message';
 
 @Injectable()
 export class AppService {
