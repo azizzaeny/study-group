@@ -4,7 +4,9 @@ FROM node:14.13-alpine as node
 LABEL author="Aziz Zaeny"
 WORKDIR /node-app
 COPY package*.json /node-app/
-RUN npm install
+
+#RUN npm install
+
 COPY ./ /node-app/
 RUN npm run build -- --output-path=./dist/out --prod
 
