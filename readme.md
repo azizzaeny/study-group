@@ -44,22 +44,89 @@ Next priority is to built application that have these concept.
   - crud for user
   
 **System Design**  
+API  
+**GET** /api/auth 
+  - **headers**: Basic Authorizations: md5(email.password)
+  - **email**: string,
+  - **password**: string 
+  - events login 
+  
+**POST** /api/auth
+  - **headers**: content-type: application/json
+  - **data** : json
+  - **email**: string
+  - **password**: string
+
+**POST** /api/auth/reset-password
+
+
+**POST** /api/auth/register
+ - public register 
+ - 
+**POST** /api/auth/reset-password-token
+ - output token that can be used to reset-password
+   - envents: generate reset-token in the user db for the users. send email that token
+  - alias forgot-password
+  - corespond with /reset-password
+ 
+**GET** /api/auth/verify-email 
+ - events auto activate user from pending by email click
+ 
+   
+**GET** /api/users 
+  - response getAll users, required user roles,
+
+**GET** /api/users/:email 
+ -  get one user for that email
+
+**POST** /api/users 
+  - creating users, required user roles, and public limit_try
+  - envents: public register. 
+  
+**POST** /api/users/update  
+  - required user roles, updating the users given jwt active.
+  
+**DELETE** /api/users/:id
+   - delete users with ID
+ 
+Workflow  
+
+auth/registers
+auth/verify-email/:token
+upserts as admin /api/users/update 
+register more
+
+auth/token generate
+auth/reset-token
+auth/reset-password/:token
 
 **Domain Model**  
 ```
 user/id
-user/full_name
+user/first_name,
+user/last_name,
 user/created_at,
+user/phone,
+user/email,
+user/last_updated,
 user/status [active, pending]
-user/phones
-user/email
+user/img-profile,
+user/auth_id
+
 
 auth/id,
 auth/method
 auth/roles [admin, members]
-auth/primary_id,
+auth/email,
 auth/password
 auth/resetoken,
+auth/emailtoken
+auth/is_valid_email
+
+img/url
+img/photo
+img/tags
+img/created_at
 
 study/id  
 study/title  
