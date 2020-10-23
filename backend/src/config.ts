@@ -12,10 +12,20 @@ export default () => ({
     authSource: null
   },
   mail: {
-    host: "<smtp-host>",
-    port: "<port>",
-    secure: false,
-    user: "<username>",
-    pass: "<password>"
+    host: "",
+    port: 465,
+    secure: true,
+    auth:{
+      user: "",
+      pass: ""
+    }
+  },
+  json: {
+    limit: '4mb',
+    extended: true
+  },
+  jwt:{
+    salt: "secret",
+    expiresIn: 36000000
   }
 });
