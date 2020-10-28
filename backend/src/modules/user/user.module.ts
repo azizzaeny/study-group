@@ -3,11 +3,11 @@ import {
 } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { UserService } from './services/user.service';
-import { UserController } from 'src/api/rest/controllers/user.controller';
-import { LoggerMiddleware } from 'src/api/rest/middleware/logger.middleware';
+import { UserService } from './user.service';
+import { UserController } from './user.controller';
+import { LoggerMiddleware } from 'src/shared/middleware/logger.middleware';
 
-import { UserSchema } from 'src/providers/user/domain/entity';
+import { UserSchema } from 'src/modules/user/user.model';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema}])],

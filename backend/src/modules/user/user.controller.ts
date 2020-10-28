@@ -14,18 +14,18 @@ import {
 
 import { AuthGuard } from '@nestjs/passport';
 
-import {TransformInterceptor} from 'src/api/rest/interceptors/transform.interceptor';
-import {LoggingInterceptor} from 'src/api/rest/interceptors/logging.interceptor';
-import {Roles} from 'src/api/rest/decorators/roles.decorator';
-import {RolesGuard} from 'src/api/rest/guards/roles.guard';
+import {TransformInterceptor} from 'src/shared/interceptors/transform.interceptor';
+import {LoggingInterceptor} from 'src/shared/interceptors/logging.interceptor';
+import {Roles} from 'src/shared/decorators/roles.decorator';
+import {RolesGuard} from 'src/shared/guards/roles.guard';
 
-import  {UserProfileDto} from 'src/providers/user/dtos/user-profile.dto';
+import  {UserProfileDto} from 'src/modules/user/dtos/user-profile.dto';
 
-import {IResponseS, IResponseF,IResponse, success, failure} from 'src/api/rest/response/http-message';
-import { UserService } from 'src/providers/user/services/user.service';
+import { IResponseS, IResponseF,IResponse, success, failure} from 'src/shared/response/http-message';
+import { UserService } from './user.service';
 
 @Controller('users')
-@UseGuards(AuthGuard('jwt'))
+//@UseGuards(AuthGuard('jwt'))
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -96,11 +96,12 @@ export class UserController {
     return 'create users same as register, but required authentication, it would replace update if exists'; 
   }
   
+  
+  // @UseGuards(RolesGuard)
+  // @Roles('user_admin')
   @Get('secret')
-  @UseGuards(RolesGuard)
-  @Roles('user_admin')
   public async SecretDummyUpsert(){
-    return await this.userService.upsertInitialData();
+    return await this.userService.upsertSeedData();
   }
 }
 

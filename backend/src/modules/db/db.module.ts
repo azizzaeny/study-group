@@ -11,4 +11,4 @@ const mongooseModule = MongooseModule.forRoot(db_url(conf.db));
   providers: [],
   exports: [mongooseModule]
 })
-export class DbConnectorModule { }
+export class DbModule { }

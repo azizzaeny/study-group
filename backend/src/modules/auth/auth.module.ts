@@ -3,15 +3,14 @@ import {
 } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AuthService } from './services/auth.service';
-import {JwtService} from './services/jwt.service';
+import { AuthService } from './auth.service';
+import {JwtService} from './jwt.service';
 import {JwtStrategy } from './strategy/jwt.strategy';
 
-import { EmailService } from 'src/providers/email/email.service';
-import { AuthController } from 'src/api/rest/controllers/auth.controller';
-import { LoggerMiddleware } from 'src/api/rest/middleware/logger.middleware';
-
-import { UserSchema } from 'src/providers/user/domain/entity';
+import { EmailService } from 'src/modules/email/email.service';
+import { AuthController } from './auth.controller';
+import { LoggerMiddleware } from 'src/shared/middleware/logger.middleware';
+import { UserSchema } from 'src/modules/user/user.model';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema}])],

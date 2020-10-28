@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { InjectModel } from '@nestjs/mongoose';
 
-import { IUserModel } from 'src/providers/user/domain/entity';
+import { IUserModel } from 'src/modules/user/user.model';
 
 @Injectable()                                                                                        
 export class JwtService {

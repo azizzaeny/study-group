@@ -3,23 +3,21 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import {IResponse, success, failure, exception} from 'src/api/rest/response/http-message';
+import {IResponse, success, failure, exception} from 'src/shared/response/http-message';
 
-import { RegisterUserDto } from 'src/providers/auth/dtos/registerUser.dto';
-import { ResendEmailDto } from 'src/providers/auth/dtos/resendEmail.dto';
-import { ResetPasswordDto } from 'src/providers/auth/dtos/resetPassword.dto';
-import { LoginDto } from 'src/providers/auth/dtos/login.dto';
+import { RegisterUserDto } from 'src/modules/auth/dtos/registerUser.dto';
+import { ResendEmailDto } from 'src/modules/auth/dtos/resendEmail.dto';
+import { ResetPasswordDto } from 'src/modules/auth/dtos/resetPassword.dto';
+import { LoginDto } from 'src/modules/auth/dtos/login.dto';
 
-import { EmailService } from 'src/providers/email/email.service';
-import { JwtService } from 'src/providers/auth/services/jwt.service';
+import { EmailService } from 'src/modules/email/email.service';
+import { JwtService } from 'src/modules/auth/jwt.service';
 
-import { IUserModel } from 'src/providers/user/domain/entity';
-import { validEmailPattern } from 'src/providers/user/domain/index';
-
-import { createUser, activateUser, updateVerifyToken,  updateResetToken, updatePassword } from 'src/providers/user/domain/operation';
-
-import { findById, findByEmail, findEmailAndToken, findByIdAndResetToken } from 'src/providers/user/domain/query';
-import { decode64,  isEmpty, aroundMinute, comparePassword } from 'src/providers/user/domain/index';
+import { IUserModel, validEmailPattern,
+	 createUser, activateUser, updateVerifyToken,  updateResetToken, updatePassword,
+	 findById, findByEmail, findEmailAndToken, findByIdAndResetToken,
+	 decode64,  isEmpty, aroundMinute, comparePassword
+       } from 'src/modules/user/user.model';
 
 const pass_salt_rounds = 10;
 const user_salt = 'myappsecret'; //TODO: dont store here
@@ -33,8 +31,7 @@ export class AuthService {
     @InjectModel('User') private readonly userModel: IUserModel,
     private readonly  configService: ConfigService
   ) {
-    console.log(this.configService.get<string>('http'));
-    
+        
   }
 
   query() { }

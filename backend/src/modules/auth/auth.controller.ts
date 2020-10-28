@@ -11,14 +11,14 @@ import {
 } from '@nestjs/common';
 
 
-import { AuthService } from 'src/providers/auth/services/auth.service';
+import { AuthService } from 'src/modules/auth/auth.service';
 
-import { RegisterUserDto } from 'src/providers/auth/dtos/registerUser.dto';
-import { ResendEmailDto } from 'src/providers/auth/dtos/resendEmail.dto';
-import { ResetPasswordDto } from 'src/providers/auth/dtos/resetPassword.dto';
-import { LoginDto } from 'src/providers/auth/dtos/login.dto';
+import { RegisterUserDto } from 'src/modules/auth/dtos/registerUser.dto';
+import { ResendEmailDto } from 'src/modules/auth/dtos/resendEmail.dto';
+import { ResetPasswordDto } from 'src/modules/auth/dtos/resetPassword.dto';
+import { LoginDto } from 'src/modules/auth/dtos/login.dto';
 
-import {IResponseS, IResponseF,IResponse, success, failure} from 'src/api/rest/response/http-message';
+import {IResponseS, IResponseF,IResponse, success, failure} from 'src/shared/response/http-message';
 
 @Controller('auth')
 export class AuthController {

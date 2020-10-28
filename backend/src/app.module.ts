@@ -4,8 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { RestModule } from 'src/api/rest/rest.module';
-import { ProviderModule } from 'src/providers/provider.module';
+import { UserModule } from 'src/modules/user/user.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { DbModule } from 'src/modules/db/db.module';
+import { EmailModule } from 'src/modules/email/email.module';
 
 import config from './config';
 
@@ -17,8 +19,10 @@ const configModule = ConfigModule.forRoot({
 @Module({
   imports: [
     configModule,
-    ProviderModule,
-    RestModule,
+    DbModule,
+    UserModule,
+    AuthModule,
+    EmailModule
   ],
   controllers: [AppController],
   providers: [AppService]

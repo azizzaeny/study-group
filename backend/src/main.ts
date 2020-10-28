@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { DefaultExceptionFilter } from 'src/api/rest/filters/default-exception.filter';
+import { DefaultExceptionFilter } from 'src/shared/filters/default-exception.filter';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 
