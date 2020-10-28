@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,10 +38,10 @@ import { LogoComponent } from './components/logo/logo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
-import { AuthGuard } from './modules/auth/auth.guard';
-import { AuthService } from './modules/auth/auth.service';
-//import { DashboardGuard } from './modules/auth/auth/dashboard.guard';
-import { TokenInterceptor } from './modules/auth/token.interceptor';
+import { AuthGuard } from './services/auth/auth.guard';
+import { AuthService } from './services/auth/auth.service';
+//import { DashboardGuard } from './services/auth/auth/dashboard.guard';
+import { TokenInterceptor } from './services/auth/token.interceptor';
 import { LoginComponent } from './layouts/login/login.component';
 import { BannerComponent } from './components/banner/banner.component';
 
@@ -71,6 +71,7 @@ import { BannerComponent } from './components/banner/banner.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CommonModule,

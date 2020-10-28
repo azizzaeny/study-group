@@ -16,7 +16,6 @@ import { RequestPassComponent } from './layouts/request-pass/request-pass.compon
 import { ProfileUpdateComponent } from './layouts/profile-update/profile-update.component';
 import { ResetPassComponent } from './layouts/reset-pass/reset-pass.component';
 import { SignupComponent } from './layouts/signup/signup.component';
-
 import { UserListsComponent} from './layouts/user-lists/user-lists.component';
 
 const routes: Routes = [

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   transition;
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
   handleLogout(){
+  }
+  handleSecret(){
+    
+    this.userService.getInitalSeeds().subscribe(data => {
+      console.log('success recieved data');
+      console.log(data);
+    });
   }
 
 }
