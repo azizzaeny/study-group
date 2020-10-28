@@ -1,0 +1,77 @@
+<div class="login-container animate__animated animate__fast bg-gradient-purple-s p-0 w-full min-h-full" [ngClass]="transition">
+  
+  <div class=" flex flex-col justify-between text-center pt-32 relative h-full max-w-2xl  mx-auto">
+    
+      <h1 class="Logo mb-10 text-center mx-auto">
+	<a href="/" (click)="logoClick($event)">
+	  <app-logo svgStyle="fill-white size-32" labelStyle="text-white tracking-wide font-extrabold text-normal uppercase"></app-logo>
+	</a>
+      </h1>
+      
+      <div class="mb-32 content w-full">
+	<div class="login-inner bg-white max-w-md mx-auto rounded-md shadow-base">
+	  <h2 class="text-2xl tracking-wide font-thin leading-snug pt-8 pb-4 violet-dark-s"> Log in to your account</h2>
+
+	  <form action="/login" method="post" role="form">
+
+	    <div class="alert alert-danger mx-10 mb-4 hidde" role="alert">There was a problem with your login.</div>
+	    
+	    <input name="_csrf" type="hidden" value="">
+	    
+	    <div class="form-group mx-10 mb-4">
+	      <label for="email">Email address</label>
+	      <div class="input-icon icon-username">
+		<fa-icon [icon]="faUser" [classes]="['violet-s']"></fa-icon>
+		
+	      </div>	      
+	      <input autofocus="true" class="form-control login-icon-input" id="email" name="email" placeholder="Email address" type="email">
+	    </div>
+	    
+	    <div class="form-group mx-10 mb-4">
+	      <label for="password">Password</label>
+	      <div class="input-icon icon-password">
+		<fa-icon [icon]="faLock" [classes]="['violet-s']"></fa-icon>
+	      </div>
+	      <input autocomplete="off" class="form-control password" id="password" name="password" placeholder="Password" type="password">
+	    </div>
+	    
+	    <div class="mx-10 my-6">
+	      <app-button label="login" type="button-login-primary" moreClass="" (buttonClick)="handleLogin($event)"></app-button>
+	    </div>
+	    
+	  </form>
+	  
+	  
+	  <div class="panel-footer pt-6 pb-6 px-6">
+
+	    <div class="flex justify-between mx-1">
+	      	      
+	      <div>    
+		<app-button label="New to Koco Sign Up?" type="button-tertiary" (buttonClick)="handleSingup()"></app-button>
+	      </div>
+
+	      <div> or </div>
+	      <div>
+		<app-button label="Forgot your password?" type="button-tertiary" (buttonClick)="handleForgotpassword()"> </app-button>
+		
+
+	      </div>
+
+	    </div>
+	    
+	  </div>
+	    
+	</div>
+	
+      </div>
+      
+  </div>
+  
+  <footer class="footer-snippet">
+    
+  </footer>
+
+</div>
+
+
+

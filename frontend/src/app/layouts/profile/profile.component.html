@@ -1,0 +1,82 @@
+<div class="dashboard-container animate__animated animate__faster p-0 w-full min-h-full" [ngClass]="transition">
+  <div class="nav">
+    <nav class="dashheader">
+      <div class="header-container max-w-3xl mx-auto px-4">
+	<div class="flex flex-row items-center justify-between">
+
+	  <div class="relative pt-2">
+	
+	    <a href="/dashboard/profile" class="">      
+	      <app-logo svgStyle="fill-white size-28" labelStyle="text-white tracking-wide font-bold text-xs uppercase"></app-logo>
+	    </a>
+	    <app-badge label="member"></app-badge>
+	  </div>
+	  
+	  
+	  <div class="pt-2">
+	    <button class="button-logout" (click)="handleLogout()">Logout </button>
+	  </div>
+	</div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="dashboard-boady-container">
+    
+    <div class="dashboard-subnav">
+      <div class="flex flex-row px-8 max-w-3xl mx-auto">
+	<a class="child-nav" href="/dashboard/profile#profile">Profile</a>
+	<a class="child-nav" href="/dashboard/profile#publicstudy">Public Study</a>
+	<a class="child-nav" href="/dashboard/profile#sharedstudy">Shared Study</a>
+      </div>
+    </div>
+    
+    
+    <div class="main-content max-w-3xl mx-auto px-4">
+      <section id="profile">
+	<div class="section-header text-gray-700 leading-5">User Profiles</div>
+	<div class="section-content-card">
+	  <div class="text-sm pb-4 text-gray-700"> You have not Complete your Profile, please update your profile first </div>
+	  
+	  <app-button label="update profile" type="button-second" moreClass="inline text-xs mb-8" (buttonClick)="handleProfileUpdate($event)"></app-button>
+	  <div class="mb-4"></div>
+	  
+	</div>
+      </section>
+      
+
+      <section id="publicstudy">
+	<div class="section-header text-gray-700 leading-5">Public Study</div>
+	<div class="section-content-card">
+	  <div class="text-sm pb-2 text-gray-700 text-center"> This app has no public study yet
+	  </div>
+	  <div class="text-xs pb-4 text-gray-700 text-center"> add a public study  by changing it status to public in order to make it visible to public </div>
+	  
+
+	  <div class="mb-4"></div>
+	</div>
+      </section>
+
+      <section id="sharedstudy">
+	<div class="section-header text-gray-700 leading-5">Shared Study</div>
+	<div class="section-content-card">
+	  <div class="text-sm pb-2 text-gray-700 text-center"> This app has no shared study yet
+	  </div>
+	  <div class="text-xs pb-4 text-gray-700 text-center"> </div>
+
+	</div>
+      </section>
+ 
+    </div>
+    
+  
+    
+  
+  
+  <div class="modal-overlay"></div>
+  <div class="loading-indicator"></div>
+
+</div>
+
+
+

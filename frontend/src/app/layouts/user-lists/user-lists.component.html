@@ -1,0 +1,194 @@
+<div class="dashboard-container animate__animated animate__faster p-0 w-full min-h-full" [ngClass]="transition">
+  <div class="nav">
+    <nav class="dashheader">
+      <div class="header-container max-w-3xl mx-auto px-4">
+	<div class="flex flex-row items-center justify-between">
+
+	  <div class="relative pt-2">
+	    <a href="/dashboard" class="">
+	      <app-logo svgStyle="fill-white size-28" labelStyle="text-white tracking-wide font-bold text-xs uppercase"></app-logo>
+	    </a>
+	    <app-badge label="admin"></app-badge>
+	  </div>
+	  
+	  
+	  <div class="pt-2">
+	    <button class="button-logout" (click)="handleLogout()">Logout </button>
+	  </div>
+	</div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="dashboard-boady-container">
+    <div class="dashboard-subnav">
+      <div class="flex flex-row px-8 max-w-3xl mx-auto">
+	<a class="child-nav" href="/dashboard/users">Users</a>
+	<a class="child-nav" href="/dashboard/study">Study</a>
+      </div>
+    </div>
+    
+    
+    <div class="main-content max-w-3xl mx-auto px-4">
+
+      <div class="header-label my-8 flex items-center justify-between">
+	<div class="mr-4 flex items-center">
+	  <h5 class="font-bold mr-2 text-normal">User Lists</h5>  
+	  <p class="text-xs text-gray-700">(Displaying <strong>1- 15</strong>) of 30 Users</p> 
+	</div>
+	<div class="filter">
+	  <label class="text-gray-600 text-xs mr-2" for="sort">Sort User By: </label>
+	  <select name="sort" id="sort" class="filter-input">
+	    <option value="newest">Newest</option>
+	    <option value="name">Name</option>  
+	  </select>	   
+	</div>
+      </div>
+
+      <div class="content-lists flex flex-row w-full mx-auto my-0 cards flex-wrap">
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://azizzaeny.github.io/cv/me.jpeg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+
+		<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+		
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+		<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+			<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+      </div>
+      
+    </div>
+    
+    
+  <div class="modal-overlay"></div>
+  <div class="loading-indicator"></div>
+
+</div>

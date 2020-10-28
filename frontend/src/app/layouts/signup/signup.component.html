@@ -1,0 +1,124 @@
+<div class="signup-container animate__animated animate__fast bg-gradient-purple-s p-0 w-full min-h-full" [ngClass]="transition">
+  
+  <div class="relative max-w-2xl mx-auto">
+
+    <div class="Header-Logo flex flex-row items-center justify-between">      
+      <h1 class="Logo my-8">
+	<a href="/" (click)="logoClick($event)">
+	  <app-logo svgStyle="fill-white size-32" labelStyle="text-white tracking-wide font-extrabold text-normal uppercase"></app-logo>
+	</a>	
+      </h1>
+      
+      <div class="text-white text-sm flex-row items-center">
+	<span class="mr-4"> Already have an account? </span>
+	<a href="/login" class="login-button" (click)="handleLoginPage($event)">login</a>	
+      </div>
+    </div>
+    
+
+    <div class="Header-Title mb-8">
+      <h1 class="text-header-title text-2xl font-thin">Sign up for free and start using Koco Study Group</h1>  
+    </div>
+    
+  
+  <div class="flex-col mb-32 content w-full ">
+    
+    <div class="bg-white max-w-2xl mx-auto rounded-sm shadow-lg relative">
+      <div class="signup-info pl-10 pt-10 h-full pb-32">
+
+	<div class="mb-2">
+	  <p class="tracking-widest uppercase font-extrabold text-xs text-gray-700 mb-4">
+	    Free Account
+	  </p>
+
+	  <div class="text-gray-700 leading-5 text-sm">
+	    Create Study publicly or privately, learn and connect your self by reseracher around the globe.
+	  </div>
+	 <hr class="inset-hr">
+	</div>
+
+	
+	<div class="mb-2">
+	  <p class="tracking-widest uppercase font-extrabold text-xs text-gray-700 mb-4">
+	    Password Guide
+	  </p>
+
+	  <div class="text-gray-700 text-sm leading-5">
+	    Create strong password with minimum required 6 character,  use letter capital alphabet and symbols, 
+	  </div>
+	 <hr class="inset-hr">
+	</div>
+
+	<div class="mb-2">
+	  <p class="tracking-widest uppercase font-extrabold text-xs text-gray-700 mb-4">
+	    Term of Services
+	  </p>
+
+	  <div class="text-gray-700 text-sm leading-5">
+	    By Signing up signifies that you have read and agree to the Terms of Service and our Privacy Policy.
+	  </div>
+	
+	</div>
+	
+	<div class="fill-all-field-err hidden"></div>
+	
+      </div>
+      
+      <div class="signup-sidebar absolute right-0 top-0 -mr-5 mt-8">
+
+	<form class="signup-form" method="post" accept-charset="UTF-8" action="/api/auth/register">
+	  
+	  <div class="input-group mb-2">
+	    <label for="first_name">
+	      First Name <sup class="text-red-900" title="required">*</sup>
+	    </label>
+	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="last_name">
+	      Last Name
+	    </label>
+	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" autocapitalize="off">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="email"> Email address <sup class="text-red-900" title="Required">*</sup></label>
+	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" aria-required="true">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="phone"> Phone Number <sup class="text-red-900" title="Required">*</sup> </label>
+	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="password"> Password </label>
+	    <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true">
+	  </div>
+
+	  <div class="input-group mb-6">
+	    <label for="confirm_password"> Confirm Password </label>
+	    <input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Password" required="true" aria-required="true">
+	  </div>
+	  
+	  
+	  <div class="mb-2"> 
+	    <app-button label="create free account" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleRegister($event)"></app-button>
+	  </div>
+	  
+	  
+	  
+	  
+	</form>
+      </div>
+      
+      
+    </div>
+    
+  </div>
+  
+      
+    
+</div>
+

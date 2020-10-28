@@ -1,0 +1,43 @@
+<div class="dashboard-container animate__animated animate__faster p-0 w-full min-h-full" [ngClass]="transition">
+  <div class="nav">
+    <nav class="dashheader">
+      <div class="header-container max-w-3xl mx-auto px-4">
+	<div class="flex flex-row items-center justify-between">
+
+	  <div class="relative pt-2">
+	    <a href="/dashboard/users" class="">
+	      <app-logo svgStyle="fill-white size-28" labelStyle="text-white tracking-wide font-bold text-xs uppercase"></app-logo>
+	    </a>
+	    <app-badge label="admin"></app-badge>
+	  </div>
+	  
+	  
+	  <div class="pt-2">
+	    <button class="button-logout" (click)="handleLogout()">Logout </button>
+	  </div>
+	</div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="dashboard-boady-container">
+        <div class="dashboard-subnav">
+      <div class="flex flex-row px-8 max-w-3xl mx-auto">
+	<a class="child-nav" href="/dashboard/users">Users</a>
+	<a class="child-nav" href="/dashboard/profile">Study</a>
+      </div>
+    </div>
+    
+    
+    <div class="main-content max-w-3xl mx-auto px-4">
+     
+    </div>
+    
+    
+  <div class="modal-overlay"></div>
+  <div class="loading-indicator"></div>
+
+</div>
+
+
+

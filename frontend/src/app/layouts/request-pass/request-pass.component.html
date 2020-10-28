@@ -1,0 +1,67 @@
+<div class="login-container animate__animated animate__fast bg-gradient-purple-sp-0 w-full min-h-full" [ngClass]="transition">
+  
+  <div class=" flex flex-col justify-between text-center pt-32 relative h-full max-w-2xl  mx-auto">
+    
+      <h1 class="Logo mb-10 text-center mx-auto">
+	<a href="/" (click)="logoClick($event)">
+	  <app-logo svgStyle="fill-white size-32" labelStyle="text-white tracking-wide font-extrabold text-normal uppercase"></app-logo>
+	</a>
+      </h1>
+      
+      <div class="mb-32 content w-full">
+	
+	<div class="login-inner bg-white max-w-md mx-auto rounded-md shadow-base">	  
+	  <h2 class="text-2xl tracking-wide font-thin leading-snug pt-8 pb-4 violet-dark-s"> Request Reset Password</h2>
+
+
+	  <div class="mx-10 my-8">
+	    <app-banner title="Succss" text="Check your inbox for the next steps. If you don't receive an email, and it's not in your spam folder this could mean you signed up with a different address"></app-banner>
+	   </div>
+	    
+	    
+	  <form action="/api/auth/reset-password" class="mx-10" method="post" role="form">
+	    <input name="_csrf" type="hidden" value="">
+	    <p class="overview text-sm pb-4 text-gray-800 text-left">Enter your email address below and we'll send you a link to reset your password.</p>
+
+	    
+	    <div class="form-group mb-4">
+	      <label for="email">Email address</label>	      
+	      <div class="input-icon icon-username">
+		<fa-icon [icon]="faUser" [classes]="['violet-s']"></fa-icon>
+	      </div>	      
+	      <input autofocus="true" class="form-control" id="email" name="email" placeholder="Email address" type="email">
+	    </div>
+
+	    <div class="pb-8">
+	      <app-button label="Request New Password" type="button-login-primary" (buttonClick)="handleRequestResetPass($event)"></app-button>
+	    </div>
+	    
+	  </form>
+	  
+	  <div class="panel-footer pt-6 pb-6 px-6">
+	    <div class="flex justify-between mx-1">	      
+	      <div>
+		<app-button label="Sign Up to Koco?" type="button-tertiary" (buttonClick)="handleSingupPage($event)"></app-button>
+	      </div>
+	      
+	      <div>    
+		<app-button label="Try to Login?" type="button-tertiary" (buttonClick)="handleLoginPage($event)"> </app-button>
+	      </div>
+
+	      
+
+	    </div>
+	  </div>
+	      
+	</div>
+      </div>
+      
+
+      
+  </div>
+    
+  <footer class="footer-snippet">
+    
+  </footer>
+
+</div>
