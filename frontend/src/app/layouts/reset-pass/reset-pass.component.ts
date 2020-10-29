@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

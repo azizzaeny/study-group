@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
 import {  ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
+
+import {UserService} from './../../services/user/user.service';
+import {AuthService} from './../../services/auth/auth.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -9,11 +14,13 @@ import {  ActivatedRoute, Router } from '@angular/router';
 export class ProfileUpdateComponent implements OnInit {
 
   transition;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.setRootClassName('bg-near-white-2s');
+    this.userService.getProfileUser().subscribe(data=> console.log(data));  
   }
+  
   ngOnDestroy(){
     this.setRootClassName('');
   }
@@ -22,16 +29,20 @@ export class ProfileUpdateComponent implements OnInit {
   }
 
   handleLogout(){
-    this.navigateTo('/', 300);
+    this.authService.logout().subscribe(success =>{
+      if(success){
+	this.router.navigate(['']);
+      }
+    });
   }
 
-  handleUpdateProfile(e){
-    e.preventDefault();
-  }
-  navigateTo(url, delay){
-    let router = this.router;
-    setTimeout(function(){
-      router.navigate([url],{ relativeTo: this.route });
-    }, delay);
-  }
+    handleUpdateProfile(e){
+      e.preventDefault();
+    }
+    navigateTo(url, delay){
+      let router = this.router;
+      setTimeout(function(){
+	router.navigate([url],{ relativeTo: this.route });
+      }, delay);
+    }
 }

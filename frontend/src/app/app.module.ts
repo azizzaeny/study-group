@@ -1,20 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-//import { AuthModule } from './components/auth/auth.module';
-//import { BadgeComponent } from './components/badge/badge.component';
-//import { ComponentsModule } from './components/components.module';
 
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
+//import {AuthModule} from './services/auth/auth.module';
+import {AuthGuard} from './services/auth/auth.guard';
+import {AuthService} from './services/auth/auth.service';
+import {DashboardGuard} from './services/auth/dashboard.guard';
+import {MemberGuard} from './services/auth/member.guard';
 
+import { TokenInterceptor } from './services/auth/token.interceptor';
+
+import {UserService} from './services/user/user.service';
 
 import { ProfileComponent } from './layouts/profile/profile.component';
 import { ProfileUpdateComponent } from './layouts/profile-update/profile-update.component';
@@ -38,12 +40,10 @@ import { LogoComponent } from './components/logo/logo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
-import { AuthGuard } from './services/auth/auth.guard';
-import { AuthService } from './services/auth/auth.service';
-//import { DashboardGuard } from './services/auth/auth/dashboard.guard';
-import { TokenInterceptor } from './services/auth/token.interceptor';
 import { LoginComponent } from './layouts/login/login.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { ViewEmailComponent } from './layouts/view-email/view-email.component';
+import { SignupConfirmComponent } from './layouts/signup-confirm/signup-confirm.component';
 
 
 @NgModule({
@@ -67,7 +67,9 @@ import { BannerComponent } from './components/banner/banner.component';
     ToastComponent,
     LogoComponent,
     LoginComponent,
-    BannerComponent,    
+    BannerComponent,
+    ViewEmailComponent,
+    SignupConfirmComponent,    
   ],
   imports: [
     BrowserModule,
@@ -75,9 +77,16 @@ import { BannerComponent } from './components/banner/banner.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AuthGuard,  AuthService, DashboardGuard, UserService, MemberGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

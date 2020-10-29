@@ -19,4 +19,7 @@ export class UserService {
   public getInitalSeeds(){
     return this.http.get<any>(`${config.api_url}/users/secret`).pipe(map(data => data.value));
   }
+  public getProfileUser(){
+    return this.http.get<any>(`${config.api_url}/users/profile`);
+  }
 }

@@ -60,46 +60,47 @@
 	
 	</div>
 	
-	<div class="fill-all-field-err hidden"></div>
+	<div class="fill-all-field-err pt-4" *ngIf="message; else hidden">
+	  <app-banner #banner title="Success" isSuccess="isSuccess" [text]="message"></app-banner>  
+	</div>
 	
       </div>
       
       <div class="signup-sidebar absolute right-0 top-0 -mr-5 mt-8">
-
-	<form class="signup-form" method="post" accept-charset="UTF-8" action="/api/auth/register">
+<form [formGroup]="signupForm" #form id="signup_form" class="signup-form" (ngSubmit)="handleRegister($event)" accept-charset="UTF-8">
 	  
 	  <div class="input-group mb-2">
 	    <label for="first_name">
 	      First Name <sup class="text-red-900" title="required">*</sup>
 	    </label>
-	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true">
+	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true" formControlName="first_name">
 	  </div>
 
 	  <div class="input-group mb-4">
 	    <label for="last_name">
 	      Last Name
 	    </label>
-	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" autocapitalize="off">
+	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" formControlName="last_name" autocapitalize="off">
 	  </div>
 
 	  <div class="input-group mb-4">
 	    <label for="email"> Email address <sup class="text-red-900" title="Required">*</sup></label>
-	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" aria-required="true">
+	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" aria-required="true" formControlName="email">
 	  </div>
 
 	  <div class="input-group mb-4">
-	    <label for="phone"> Phone Number <sup class="text-red-900" title="Required">*</sup> </label>
-	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number">
+	    <label for="phone"> Phone Number </label>
+	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number" formControlName="phone">
 	  </div>
 
 	  <div class="input-group mb-4">
-	    <label for="password"> Password </label>
-	    <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true">
+	    <label for="password"> Password  <sup class="text-red-900" title="Required">*</sup></label>
+	    <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true" formControlName="password">
 	  </div>
 
 	  <div class="input-group mb-6">
-	    <label for="confirm_password"> Confirm Password </label>
-	    <input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Password" required="true" aria-required="true">
+	    <label for="confirm_password"> Confirm Password  <sup class="text-red-900" title="Required">*</sup> </label>
+	    <input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Password" required="true" aria-required="true" formControlName="confirm_password">
 	  </div>
 	  
 	  
@@ -107,9 +108,7 @@
 	    <app-button label="create free account" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleRegister($event)"></app-button>
 	  </div>
 	  
-	  
-	  
-	  
+	  	  
 	</form>
       </div>
       

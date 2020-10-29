@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {  ActivatedRoute, Router } from '@angular/router';
+
+
+import { AuthService } from '../../services/auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +12,8 @@ import {  ActivatedRoute, Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   transition;
-  
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, private authService: AuthService) {
+  }
   ngOnInit(): void {
     this.setRootClassName('bg-near-white-2s');
   }
@@ -22,7 +25,11 @@ export class ProfileComponent implements OnInit {
   }
   
   handleLogout(){
-    this.navigateTo('/', 300);
+    this.authService.logout().subscribe(success =>{
+      if(success){
+	this.router.navigate(['']);
+      }
+    });
   }
   
   handleProfileUpdate(e){

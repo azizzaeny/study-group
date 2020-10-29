@@ -6,9 +6,20 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-  @Input() title="";
+  @Input() title="Success";
   @Input() text=""
-  constructor() { }
+  bannerClass="banner-success";
+  @Input() isSuccess = true;
+  
+  constructor() {
+    if(this.isSuccess){
+      this.bannerClass="banner-success"
+      this.title="Success";
+    }else{
+      this.bannerClass="banner-failure";
+      this.title = 'Failure';
+    }
+  }
 
   ngOnInit(): void {
   }

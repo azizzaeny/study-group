@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
+import { AuthService } from '../../services/auth/auth.service';
+
+import {  ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,14 +13,19 @@ import { UserService } from '../../services/user/user.service';
 export class DashboardComponent implements OnInit {
 
   transition;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService,
+	      private router: Router) { }
 
   ngOnInit(): void {
   }
   handleLogout(){
+    this.authService.logout().subscribe(success =>{
+      if(success){
+	this.router.navigate(['']);
+      }
+    });
   }
-  handleSecret(){
-    
+  handleSecret(){    
     this.userService.getInitalSeeds().subscribe(data => {
       console.log('success recieved data');
       console.log(data);
