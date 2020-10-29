@@ -31,7 +31,7 @@
     
     <div class="main-content max-w-3xl mx-auto px-4">
 
-      <div class="header-label my-8 flex items-center justify-between">
+      <div class="header-label my-4 flex items-center justify-between">
 	<div class="mr-4 flex items-center">
 	  <h5 class="font-bold mr-2 text-normal">User Lists</h5>  
 	  <p class="text-xs text-gray-700">(Displaying <strong>1- 15</strong>) of 30 Users</p> 
@@ -45,8 +45,13 @@
 	</div>
       </div>
 
+      <div class="mb-4">
+	<app-button label="Add Users" type="button-second"></app-button>
+      </div>
+      
       <div class="content-lists flex flex-row w-full mx-auto my-0 cards flex-wrap">
-	
+
+	<!--1. -->
 	<div class="card">
 	  <a class="relative">
 	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
@@ -69,7 +74,8 @@
 	    </div>
 	  </a>
 	</div>
-
+	
+	<!--2. -->
 	
 	<div class="card">
 	  <a class="relative">
@@ -80,43 +86,89 @@
 	    </div>
 	    <div class="user-block-data p-6">
 	      <div class="user-avatar">
-		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
-		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/dd/dd4145b0ec830702c9147bc998a3519192fdcfd5_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">a a </div>
+			      
 	      </div>
 	      <hr class="my-2">
-	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
-	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">a@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
 	    </div>
 	    <div class="user-stats text-xs bg-gray-300 p-2">
-	      Last Updated: 2 days ago
+	      Last Updated: 1 days ago
 	    </div>
 	  </a>
 	</div>
-
-
-		<div class="card">
+	
+	<!--2. -->
+	<div class="card">
 	  <a class="relative">
 	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
-	      <span>
+	      <span class="hidden">
 	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
 		</span>
 	    </div>
 	    <div class="user-block-data p-6">
 	      <div class="user-avatar">
-		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
-		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/15/1589aaf43979b834822074aabf7ea5d180c01ad2_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Bony b </div>
+			      
 	      </div>
 	      <hr class="my-2">
-	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
-	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">b@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
 	    </div>
 	    <div class="user-stats text-xs bg-gray-300 p-2">
 	      Last Updated: 2 days ago
 	    </div>
 	  </a>
 	</div>
-
-		
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span class="hidden">
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/82/82e721c6234bd2ede58f38ee02209eef5f0c7f92_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Dony </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">c@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span class="hidden">
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/41/41ad7d0017259afa8b2ec7875ae6a6d5ffdfb4da_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Am </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">d@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	
 	<div class="card">
 	  <a class="relative">
 	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
@@ -126,20 +178,45 @@
 	    </div>
 	    <div class="user-block-data p-6">
 	      <div class="user-avatar">
-		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
-		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/a0/a07d64a15b1ada5abe2eefe84c8de4593127dc2e_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Yuzin </div>
+			      
 	      </div>
 	      <hr class="my-2">
-	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
-	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">f@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
 	    </div>
 	    <div class="user-stats text-xs bg-gray-300 p-2">
 	      Last Updated: 2 days ago
 	    </div>
 	  </a>
 	</div>
-
-		<div class="card">
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span class="hidden">
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+	      </span>
+	      
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c8e93c0ea9e93892613a365876aeec34a5e04a00_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Sonya</div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">g@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	
+	<div class="card">
 	  <a class="relative">
 	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
 	      <span>
@@ -148,20 +225,20 @@
 	    </div>
 	    <div class="user-block-data p-6">
 	      <div class="user-avatar">
-		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
-		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ef/ef5b1ed119e4633b1148f710d901cdcc89b2f571_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Danya </div>
+			      
 	      </div>
 	      <hr class="my-2">
-	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
-	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">h@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
 	    </div>
 	    <div class="user-stats text-xs bg-gray-300 p-2">
 	      Last Updated: 2 days ago
 	    </div>
 	  </a>
 	</div>
-
-			<div class="card">
+	<div class="card">
 	  <a class="relative">
 	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
 	      <span>
@@ -170,15 +247,109 @@
 	    </div>
 	    <div class="user-block-data p-6">
 	      <div class="user-avatar">
-		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2ef2c3837dae0cab611197eb220049e1a879ce71_full.jpg">
-		<div class="user-full-name text-sm font-bold inline-block">Aziz Zaeny </div>
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/de/de00af6f0c232e1f1f5e6b088bd2016846c894f1_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Dor </div>
+			      
 	      </div>
 	      <hr class="my-2">
-	      <div class="user-email text-sm font-bold text-gray-700 pt-1">aziz@mail.com</div>
-	      <div class="user-status font-bold text-xs text-gray-700 pt-1">admin <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">i@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span class="hidden">
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/104577894deedd06ea80d9f3d902c3871e21057a_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Seatke </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">j@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
 	    </div>
 	    <div class="user-stats text-xs bg-gray-300 p-2">
 	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/49/49ab517888916b6b873b37516c47667fd97d9d44_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Sinta </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">sint@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+	
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span>
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/85/851e4c76f7ba71121eb4b44a9b8a6efd3232d3e7_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">Sup </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">k@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 2 days ago
+	    </div>
+	  </a>
+	</div>
+
+	<div class="card">
+	  <a class="relative">
+	    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+	      <span class="hidden">
+	      	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+		</span>
+	    </div>
+	    <div class="user-block-data p-6">
+	      <div class="user-avatar">
+		<img alt="Aziz Zaney" class="avatar inline-block mr-1" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/8d/8dd9d3073ae50aa96c37bc91df9e07a706f7362c_full.jpg">
+		<div class="user-full-name text-sm font-bold inline-block">x </div>
+			      
+	      </div>
+	      <hr class="my-2">
+	      <div class="user-email text-sm font-bold text-gray-700 pt-1">x@mail.com</div>
+	      <div class="user-status font-bold text-xs text-gray-700 pt-1">members <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+	    </div>
+	    <div class="user-stats text-xs bg-gray-300 p-2">
+	      Last Updated: 1 days ago
 	    </div>
 	  </a>
 	</div>

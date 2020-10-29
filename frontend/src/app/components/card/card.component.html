@@ -1,1 +1,21 @@
-<p>card works!</p>
+<div class="card">
+  <a class="relative">
+    <div class="user-status absolute top-0 right-0 mr-2 mt-6">
+      <span>
+	<fa-icon [icon]="faCheck" [classes]="['text-green-700','mr-2']"></fa-icon>
+      </span>
+    </div>    
+    <div class="user-block-data p-6">
+      <div class="user-avatar">
+	<img alt="" class="avatar inline-block mr-1" [src]="card.profile_pic.url">
+	<div class="user-full-name text-sm font-bold inline-block">{{card.first_name + card.last_name}} </div>
+      </div>
+      <hr class="my-2">
+      <div class="user-email text-sm font-bold text-gray-700 pt-1">{{card.email}}</div>
+      <div class="user-status font-bold text-xs text-gray-700 pt-1">{{card.auth.method}} <fa-icon [icon]="faUserShield" [classes]="['text-green-700']"></fa-icon></div>
+    </div>
+    <div class="user-stats text-xs bg-gray-300 p-2">
+      Last Updated: {{card.last_updated}}
+    </div>
+  </a>
+</div>

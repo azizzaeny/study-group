@@ -851,8 +851,8 @@ input:-webkit-autofill:focus {
 }
 
 .avatar{
-    max-height: 24px;
-    width: 24px;
+    max-height: 32px;
+    width: 32px;
     margin-right: 5px;
     vertical-align: middle;
     border-radius: 50%;

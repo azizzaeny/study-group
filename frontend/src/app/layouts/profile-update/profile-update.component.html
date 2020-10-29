@@ -38,74 +38,89 @@
 	<h2 class="text-3xl text-purple-900 font-thin">Update profile</h2>
       </div>
       
-      <div class="mt-6">
+      <div class="mt-2">
 
 	<h3 class="text-xs text-gray-700 font-bold tracking-wider mb-2 uppercase">Profile</h3>
-	<form class="" method="post" accept-charset="UTF-8" action="/api/auth/register">
+
+	
+	<form class="" [formGroup]="updateForm" (ngSubmit)="handleUpdateProfile($event)">
 	  <div class="input-group mb-4">
 	    <label for="first_name">
 	      First Name <sup class="text-red-900" title="required">*</sup>
 	    </label>
-	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true">
+	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true" formControlName="first_name">
 	  </div>
 
 	  <div class="input-group mb-4">
 	    <label for="last_name">
 	      Last Name
 	    </label>
-	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" autocapitalize="off">
+	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" autocapitalize="off" formControlName="last_name">
 	  </div>
 
 	  <div class="input-group mb-4">
 	    <label for="email"> Email address <sup class="text-red-900" title="Required">*</sup></label>
-	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" aria-required="true">
+	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" aria-required="true" formControlName="email">
 	  </div>
 
 	  <div class="input-group mb-4">
 	    <label for="phone"> Phone Number <sup class="text-red-900" title="Required">*</sup> </label>
-	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number">
+	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number" formControlName="phone">
 	  </div>
+
+
+	  <div class="mt-4 mb-2"> 
+	    <app-button label="Update Profile" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleUpdateProfile($event)"></app-button>    
+	  </div>
+	</form>
 
 	  <div class="mt-4">
 	    <hr class="inset-hr">
-	  </div>
-	  
-	<h3 class="text-xs text-gray-700 font-bold tracking-wider uppercase">Auth</h3>
-	  <div class="input-group mb-4">
-	    <label for="password"> Password </label>
-	    <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true">
-	  </div>
+	  </div>	  
 
-	  <div class="input-group mb-4">
-	    <label for="confirm_password"> Confirm Password </label>
-	    <input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Password" required="true" aria-required="true">
-	  </div>
+	  <h3 class="text-xs text-gray-700 font-bold tracking-wider uppercase">Auth</h3>
+	  
+	  <form class="" [formGroup]="authForm" (ngSubmit)="handleUpdateAuth($event)">   
+	     <div class="input-group mb-4">
+	       <label for="password"> Password </label>
+	       <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true" formControlName="password">
+	     </div>
+	     <div class="input-group mb-4">
+	       <label for="confirm_password"> Confirm Password </label>
+	       <input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Password" required="true" aria-required="true" formControlName="confirm_password">
+	     </div>
+	     
+	     <div class="mt-4 mb-2">
+	       <app-button label="Update Password" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleUpdateAuth($event)"></app-button>    
+	     </div>	  
+	  </form>
 	  
 	  <div class="mt-4">
 	    <hr class="inset-hr">
 	  </div>
 	  
 	  <h3 class="text-xs text-gray-700 font-bold tracking-wider uppercase">Profile Avatar</h3>
+	  	  
+	  <form [formGroup]="picForm" (ngSubmit)="handleUpdatePic($event)">
+	    <div class="input-group mb-4">
+	      <label for="pic"> picture </label>  
+	      <input type="file" name="pic" id="pic" value="" placeholder="" formControlName="pic_url">
+	    </div>
+	    
+	    <div class="input-group mb-4">
+	      <img src="" #profilePic width=64 height=64>
+	    </div>
+	    
+	    <app-button label="Update Profile Picture" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleUpdatePic($event)"></app-button>
+	   
+	  </form>
 	  
-	  
-	  <div class="mt-8 mb-4"> 
-	    <app-button label="Update Profile" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleUpdateProfile($event)"></app-button>
-	  </div>
-	  
-	  
-	  
-	  
-	</form>
-
       </div>
       
       
     </div>
     
-  
     
-  
-  
   <div class="modal-overlay"></div>
   <div class="loading-indicator"></div>
 
