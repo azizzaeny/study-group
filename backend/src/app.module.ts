@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-
+import { JwtTokenMiddleware }  from 'src/shared/middleware/jwt-token.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
+import { AppGateway } from './app.gateway';
 import { UserModule } from 'src/modules/user/user.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { DbModule } from 'src/modules/db/db.module';
@@ -27,4 +27,10 @@ const configModule = ConfigModule.forRoot({
   controllers: [AppController],
   providers: [AppService]
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtTokenMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

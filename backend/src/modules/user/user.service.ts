@@ -45,12 +45,23 @@ export class UserService {
     await this.userModel.remove({});
     let status = await this.userModel.bulkWrite(create_user_seeds(user_lists));
     let users = await findAll(this.userModel);
-    return success('upsert seed data', users)
-    
+    return success('upsert seed data', users);
   }
-  async getProfileUser(user){
-    return success('return users', user);
+
+  async getProfileUser(email){
+    let users = await this.userModel.findOne({email : email});
+    let new_users = Object.assign(users, {
+      auth: {}
+    });
+    if(Boolean(users)){
+      return success('profile.user.success', new_users);
+    }
+    return failure('profile.user.failure', { email });
   }
   
+  async whoMe(email){
+    let user = await this.userModel.findOne({ email: email });
+    return success('user.whome', user);
+  }
 }
 

@@ -7,22 +7,26 @@ import {
     HttpStatus,
     UseGuards,
     UseInterceptors,
-    Param,
+  Param,
+  Req,
+  Request
 } from '@nestjs/common';
 
 
 import { AuthService } from 'src/modules/auth/auth.service';
-
+import { UserService } from 'src/modules/user/user.service';
 import { RegisterUserDto } from 'src/modules/auth/dtos/registerUser.dto';
 import { ResendEmailDto } from 'src/modules/auth/dtos/resendEmail.dto';
 import { ResetPasswordDto } from 'src/modules/auth/dtos/resetPassword.dto';
 import { LoginDto } from 'src/modules/auth/dtos/login.dto';
+// import { AuthGuard } from 'src/modules/auth/auth.guard';
+import { User } from 'src/shared/decorators/user.decorator';
 
 import {IResponseS, IResponseF,IResponse, success, failure} from 'src/shared/response/http-message';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService, private userService: UserService) { }
 
   @Get()
   createAuthTokenWithBasicHeaders() {
@@ -85,5 +89,11 @@ export class AuthController {
   @Get('view-token/:email')
   public async viewTokenEmail(){
     return success('viewed.token');
+  }
+  
+  @Get('whoami')
+  async showWhoMe(@Req() req){
+    console.log(req.locals.email);
+    return success('success', req.locals.email);
   }
 }

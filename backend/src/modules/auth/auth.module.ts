@@ -4,6 +4,8 @@ import {
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { AuthService } from './auth.service';
+
+import { UserService } from 'src/modules/user/user.service';
 import {JwtService} from './jwt.service';
 import {JwtStrategy } from './strategy/jwt.strategy';
 
@@ -15,7 +17,7 @@ import { UserSchema } from 'src/modules/user/user.model';
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema}])],
   controllers: [AuthController],
-  providers: [AuthService, EmailService, JwtService, JwtStrategy]
+  providers: [AuthService, EmailService, JwtService, JwtStrategy, UserService]
 })
 
 export class AuthModule implements NestModule {

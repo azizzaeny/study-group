@@ -27,6 +27,7 @@
     "@nestjs/mongoose": "^7.0.2",
     "@nestjs/passport": "^7.1.0",
     "@nestjs/platform-express": "^7.1.1",
+    "@nestjs/websockets": "^7.4.4",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/passport-jwt": "^3.0.3",
     "bcryptjs": "^2.4.3",

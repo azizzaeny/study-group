@@ -20,19 +20,18 @@ import {TransformInterceptor} from 'src/shared/interceptors/transform.intercepto
 import {LoggingInterceptor} from 'src/shared/interceptors/logging.interceptor';
 import {Roles} from 'src/shared/decorators/roles.decorator';
 import {RolesGuard} from 'src/shared/guards/roles.guard';
-
 import  {UserProfileDto} from 'src/modules/user/dtos/user-profile.dto';
-
 import { IResponseS, IResponseF,IResponse, success, failure} from 'src/shared/response/http-message';
 import { UserService } from './user.service';
+import {User} from 'src/shared/decorators/user.decorator';
 
 @Controller('users')
-//@UseGuards(AuthGuard('jwt'))
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) { }
   
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
   @Roles('user')
   public async getAllUsers() : Promise<IResponse<any>> {
@@ -44,6 +43,7 @@ export class UserController {
   }
 
   @Get('id/:id')
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
   @Roles('user')
   public async getOneUserMatchedId(@Param() params): Promise<IResponse<any>>{
@@ -56,6 +56,7 @@ export class UserController {
 
   
   @Get('email/:email')
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
   @Roles('user')
   public async getOneUserByEmail(@Param() params): Promise<IResponse<any>>{
@@ -68,6 +69,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
   @Roles('user_admin')
   public async deleteEntityUsers(@Param() params): Promise<IResponse<any>>{
@@ -79,6 +81,7 @@ export class UserController {
   }
 
   @Put('profile')
+  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
   @Roles('user')
   async profileUpdate(userProfile: UserProfileDto){
@@ -90,18 +93,15 @@ export class UserController {
   }
 
   @Get('profile')
-  
-  //@UseGuards(RolesGuard)
-  //@Roles('user')
-  
+  // @UseGuards(RolesGuard)
+  // @Roles('user')  
   async getProfileUser(@Req() req){
-    console.log('REquesting', req);
-    let user = req.user;
+    let email = req.locals.user.email;
     try{
-	return await this.userService.getProfileUser(user);
-      }catch(err){
-	return failure('user.profile.cannot_get_profile_generic_error_catch');
-      }
+      return await this.userService.getProfileUser(email);
+    }catch(err){
+      return failure('user.profile.cannot_get_profile_generic_error_catch');
+    }
   }
   
   @Post()
@@ -114,15 +114,13 @@ export class UserController {
   
 
   @Get('secret')
-  // @UseGuards(RolesGuard)
-  // @Roles('user_admin')
   public async SecretDummyUpsert(){
     return await this.userService.upsertSeedData();
   }
 }
 
 /*
-update gallery
-update profile
-update settings
+  update gallery
+  update profile
+  update settings
 */

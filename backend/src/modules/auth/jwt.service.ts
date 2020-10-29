@@ -26,7 +26,8 @@ export class JwtService {
   }
 
   async verifyUser(signedEmail){
-    const record =  await this.userModel.findOne({email: signedEmail});
+    const record =  await this.userModel.findOne({ email: signedEmail});
+    console.log('checked record', signedEmail)
     if(record){
       return record;
     }
