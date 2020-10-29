@@ -48,5 +48,9 @@ export class UserService {
     return success('upsert seed data', users)
     
   }
+  async getProfileUser(user){
+    return success('return users', user);
+  }
   
 }
+

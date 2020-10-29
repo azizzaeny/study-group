@@ -16,6 +16,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(bodyParser.json({ limit: conf.json.limit }));
   app.use(bodyParser.urlencoded(conf.json));
+  app.enableCors();
 
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new DefaultExceptionFilter());

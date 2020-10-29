@@ -6,6 +6,8 @@ import {
   Body,
   Delete,
   HttpCode,
+  Req,
+  Request,
   HttpStatus,
   UseGuards,
   UseInterceptors,
@@ -87,7 +89,20 @@ export class UserController {
     }
   }
 
+  @Get('profile')
   
+  //@UseGuards(RolesGuard)
+  //@Roles('user')
+  
+  async getProfileUser(@Req() req){
+    console.log('REquesting', req);
+    let user = req.user;
+    try{
+	return await this.userService.getProfileUser(user);
+      }catch(err){
+	return failure('user.profile.cannot_get_profile_generic_error_catch');
+      }
+  }
   
   @Post()
   @UseGuards(RolesGuard)
@@ -97,9 +112,10 @@ export class UserController {
   }
   
   
+
+  @Get('secret')
   // @UseGuards(RolesGuard)
   // @Roles('user_admin')
-  @Get('secret')
   public async SecretDummyUpsert(){
     return await this.userService.upsertSeedData();
   }

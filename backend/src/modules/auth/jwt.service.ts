@@ -16,11 +16,12 @@ export class JwtService {
     let jwtConfig = this.configService.get('jwt');
     let expiresIn = jwtConfig.expiresIn;
     let salt      = jwtConfig.salt;
-    let user_sign      = {email: email, roles: roles };
+    let user_sign = {email: email, roles: roles, };
     let token = jwt.sign(user_sign, salt, {expiresIn});
     return {
       expires_in: expiresIn,
-      access_token: token
+      jwt: token,
+      refreshToken: ''
     }
   }
 

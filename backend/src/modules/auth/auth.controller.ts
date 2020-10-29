@@ -77,4 +77,13 @@ export class AuthController {
   public async resetPasswordWithToken(@Body() resetPasswordDto: ResetPasswordDto, @Param() params) : Promise<IResponse<any>>{
     return await this.authService.resetPasswordWithToken(resetPasswordDto, params.token);
   }
+  
+  @Post('logout')
+  public async logout(){
+    return success('logout.success');
+  }
+  @Get('view-token/:email')
+  public async viewTokenEmail(){
+    return success('viewed.token');
+  }
 }
