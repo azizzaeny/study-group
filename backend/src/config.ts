@@ -1,3 +1,4 @@
+// TODO: use env
 export default () => ({
   http: {
     host: process.env.http_host || "<server-url>",

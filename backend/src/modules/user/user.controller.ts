@@ -20,8 +20,8 @@ import {TransformInterceptor} from 'src/shared/interceptors/transform.intercepto
 import {LoggingInterceptor} from 'src/shared/interceptors/logging.interceptor';
 import {Roles} from 'src/shared/decorators/roles.decorator';
 import {RolesGuard} from 'src/shared/guards/roles.guard';
-import  {UserProfileDto} from 'src/modules/user/dtos/user-profile.dto';
-import { IResponseS, IResponseF,IResponse, success, failure} from 'src/shared/response/http-message';
+import  {UserProfileDto, UserAuthDto, UserAvatarDto, UserProfileAllDto } from 'src/modules/user/dtos/user-profile.dto';
+import { IResponse, response, success, failure} from 'src/shared/response/http-message';
 import { UserService } from './user.service';
 import {User} from 'src/shared/decorators/user.decorator';
 
@@ -29,98 +29,122 @@ import {User} from 'src/shared/decorators/user.decorator';
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) { }
-  
+
   @Get()
-  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
-  @Roles('user')
-  public async getAllUsers() : Promise<IResponse<any>> {
-    try{
-      return await this.userService.getAllUsers();
-    }catch(err){
-      return failure('user.getAll.catch_generic_error');
-    }
+  @Roles('user_admin')
+  public async getAllUsers() : Promise<IResponse<any>>{
+    return response(await this.userService.getUsers());
   }
-
-  @Get('id/:id')
-  @UseGuards(AuthGuard('jwt'))
-  @UseGuards(RolesGuard)
-  @Roles('user')
-  public async getOneUserMatchedId(@Param() params): Promise<IResponse<any>>{
-    try{
-      return await this.userService.getOneUserMatchedId(params.id);
-    }catch(err){
-      return failure('user.getOne.catch_generic_error');
-    }
-  }
-
   
   @Get('email/:email')
-  @UseGuards(AuthGuard('jwt'))
   @UseGuards(RolesGuard)
-  @Roles('user')
-  public async getOneUserByEmail(@Param() params): Promise<IResponse<any>>{
+  @Roles('user_admin')
+  public async getEmail(@Param() params,){
+    return response(await this.userService.getUserByEmail(params.email));
+  }
+
+  @Delete('email/:email')
+  @UseGuards(RolesGuard)
+  @Roles('user_admin')
+  public async deleteByEmail(@Param() params){
     try{
-      return await this.userService.getOneUserByEmail(params.id);
+      return response(await this.userService.deleteUserByEmail(params.email));
     }catch(err){
-      return failure('user.getOne.catch_generic_error');
+      return failure('user.delete.catch_generic_error');
     }
     
   }
 
-  @Delete(':id')
-  @UseGuards(AuthGuard('jwt'))
+  @Put('')
   @UseGuards(RolesGuard)
   @Roles('user_admin')
-  public async deleteEntityUsers(@Param() params): Promise<IResponse<any>>{
+  public async upsertUser(@Body() userProfileAll: UserProfileAllDto, ){
     try{
-      return await this.userService.deleteEntityUsers(params.id);
+      let email = userProfileAll.email;
+      return response(await this.userService.updateWholeProfile(email, userProfileAll)); 
     }catch(err){
-      return failure('user.delete.catch_generic_error');
+      return failure('user.add.catch_generic_error');
+    }
+  }
+  
+  @Put('email/:email')
+  @UseGuards(RolesGuard)
+  @Roles('user_admin')
+  public async updateUser(@Body() userProfileAll: UserProfileAllDto, @Param() params){
+    try{
+      return response(await this.userService.updateWholeProfile(params.email,userProfileAll)); 
+    }catch(err){
+      return failure('user.profile.catch_generic_error');
     }
   }
 
-  @Put('profile')
-  @UseGuards(AuthGuard('jwt'))
+  
+  @Get('profile/:email')
+  @UseGuards(RolesGuard)
+  @Roles('user')  
+  public async getProfileUser(@Param() params, @Req() req){
+    try{
+      return response(await this.userService.getProfile(params.email, req));
+    }catch(err){
+      return failure('user.profile.cannot_get_profile_generic_error');
+    }
+    
+  }
+
+  
+
+	 
+  @Get('profile')
   @UseGuards(RolesGuard)
   @Roles('user')
-  async profileUpdate(userProfile: UserProfileDto){
+  public async getProfileUserRequest(@Req() req){
     try{
-      return await this.userService.profileUpdate(userProfile);
-    }catch(err){
-      return failure('user.profile.cannot_update_profile_generic_error_catch');
-    }
+      let email = req.locals.user.email;
+      return response(await this.userService.getProfile(email, req))
+      }catch(err){
+	return failure('user.profile.cannot_get_profile_generic_error');
+      }
   }
 
-  @Get('profile')
-  // @UseGuards(RolesGuard)
-  // @Roles('user')  
-  async getProfileUser(@Req() req){
-    let email = req.locals.user.email;
-    try{
-      return await this.userService.getProfileUser(email);
-    }catch(err){
-      return failure('user.profile.cannot_get_profile_generic_error_catch');
-    }
-  }
+
   
-  @Post()
+  @Put('profile')
   @UseGuards(RolesGuard)
-  @Roles('user_admin')
-  upsertUsersWithRoles(){
-    return 'create users same as register, but required authentication, it would replace update if exists'; 
+  @Roles('user')
+  public async updateProfileUser(@Body() userProfileDto: UserProfileDto, @Req() req){
+    
+    try{
+      return response(await this.userService.updateProfile(userProfileDto, req));
+     }catch(err){ 
+       return failure('user.profile.update_genereric_error');
+     }
+    
   }
-  
-  
 
+  @Put('set-password')
+  @UseGuards(RolesGuard)
+  @Roles('user')
+  public async updateProfilePassword(@Body() userAuthDto: UserAuthDto, @Req() req){
+    try{
+      return response(await this.userService.updatePassword(userAuthDto, req));
+    }catch(err){ 
+      return failure('user.profile.update_genereric_error');
+    }
+  }
+
+  
+  @Put('profile-picture')
+  @UseGuards(RolesGuard)
+  @Roles('user')
+  public async updateProfilePicture(@Body() userProfileDto: UserProfileDto){
+    return failure('user.profile.update_picture_generic_error');
+  }
+
+  
   @Get('secret')
   public async SecretDummyUpsert(){
-    return await this.userService.upsertSeedData();
+    return await this.userService.upsertSeedData(); 
   }
+  
 }
-
-/*
-  update gallery
-  update profile
-  update settings
-*/

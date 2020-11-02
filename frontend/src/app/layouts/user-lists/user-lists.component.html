@@ -46,11 +46,37 @@
       </div>
 
       <div class="mb-4">
-	<app-button label="Add Users" type="button-second"></app-button>
+	<app-button label="Add Users" type="button-second" (buttonClick)="routeToAdd($event)"></app-button>
       </div>
       
       <div class="content-lists flex flex-row w-full mx-auto my-0 cards flex-wrap">
 
+	<table *ngIf="users | async" class="table">
+	  <thead>
+	    <tr>
+	      <th class="p-8"> Full Name </th>
+	      <th class="p-8"> Email </th>
+	      <th class="p-8"> phone </th>
+	      <th class="p-8"> status </th>
+	      <th class="p-8"> action </th>
+	    </tr>
+	  </thead>
+	  <tr *ngFor="let user of users | async">
+	    <td class="p-8">{{user.first_name+user.last_name}}</td>
+	    <td class="p-8">{{user.email}}</td>
+	    <td class="p-8">{{user.phone}}</td>
+	    <td class="p-8">{{user.status}}</td>
+	    <td class="p-8">
+	      <div class="flex">
+		<button (click)="deleteUser(user.email)">Delete</button>
+		<button (click)="updateUser(user.email)">Edit</button>
+	      </div>
+	      
+	    </td>
+	  </tr>
+	  		 
+	</table>
+	
       </div>
       
     </div>
@@ -60,3 +86,4 @@
   <div class="loading-indicator"></div>
 
 </div>
+ 

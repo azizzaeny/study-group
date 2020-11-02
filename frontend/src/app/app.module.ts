@@ -9,10 +9,10 @@ import { AppComponent } from './app.component';
 
 
 //import {AuthModule} from './services/auth/auth.module';
-import {AuthGuard} from './services/auth/auth.guard';
-import {AuthService} from './services/auth/auth.service';
-import {DashboardGuard} from './services/auth/dashboard.guard';
-import {MemberGuard} from './services/auth/member.guard';
+import { AuthGuard } from './services/auth/auth.guard';
+import { AuthService } from './services/auth/auth.service';
+import { DashboardGuard } from './services/auth/dashboard.guard';
+import { MemberGuard } from './services/auth/member.guard';
 
 import { TokenInterceptor } from './services/auth/token.interceptor';
 
@@ -44,7 +44,10 @@ import { LoginComponent } from './layouts/login/login.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { ViewEmailComponent } from './layouts/view-email/view-email.component';
 import { SignupConfirmComponent } from './layouts/signup-confirm/signup-confirm.component';
-
+import {MemberService} from './services/user/member.service';
+import { UserAddComponent } from './layouts/user-add/user-add.component';
+import { UserUpdateComponent } from './layouts/user-update/user-update.component';
+import { UserDeleteConfirmComponent } from './layouts/user-delete-confirm/user-delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,10 @@ import { SignupConfirmComponent } from './layouts/signup-confirm/signup-confirm.
     LoginComponent,
     BannerComponent,
     ViewEmailComponent,
-    SignupConfirmComponent,    
+    SignupConfirmComponent,
+    UserAddComponent,
+    UserUpdateComponent,
+    UserDeleteConfirmComponent,    
   ],
   imports: [
     BrowserModule,

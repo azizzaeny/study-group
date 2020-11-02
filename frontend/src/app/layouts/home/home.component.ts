@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,8 @@ import {  ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   transition;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+	      private authService : AuthService) { }
 
   handleButtonLogin(){
     console.log('proceed login');
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit {
   exitTransition(){
     this.transition = 'fade-out-right-sm';
   }
-  
+
   transitionTo(url){
     let router = this.router;
     setTimeout(function(){

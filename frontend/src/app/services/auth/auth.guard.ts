@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
       if (isMember) {
 	this.router.navigate(['/dashboard/profile']);
       }else if(isAdmin){	
-	this.router.navigate(['/dashboard/users']);	
+	this.router.navigate(['/dashboard/']);	
       }
     }
   

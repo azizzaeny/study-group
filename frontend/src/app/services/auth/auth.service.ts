@@ -12,11 +12,11 @@ const config = { api_url: environment.api_url};
 })
 export class AuthService {
 
-    private readonly JWT_TOKEN = 'JWT_TOKEN';
-    private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-    private loggedUser: string;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  public loggedUser: string;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   signup(user): Observable<any>{
     return this.http.post<any>(`${config.api_url}/auth/register`, user);

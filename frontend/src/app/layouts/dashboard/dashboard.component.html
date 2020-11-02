@@ -21,7 +21,8 @@
   </div>
 
   <div class="dashboard-boady-container">
-        <div class="dashboard-subnav">
+
+    <div class="dashboard-subnav">
       <div class="flex flex-row px-8 max-w-3xl mx-auto">
 	<a class="child-nav" href="/dashboard/users">Users</a>
 	<a class="child-nav" href="/dashboard/profile">Study</a>
@@ -31,6 +32,28 @@
     
     <div class="main-content max-w-3xl mx-auto px-4 py-4">
       <button class="button-logout" (click)="handleSecret()"> secret </button>
+      
+      <section id="users">
+	<div class="section-header text-gray-700 leading-5">Users</div>
+	<div class="section-content-card">
+	  <div class="text-sm pb-4 text-gray-700"> No new members </div>	  
+	  <app-button label="View All Users" type="button-second" moreClass="inline text-xs mb-8" (buttonClick)="handleViewUsers($event)"></app-button>
+	  <div class="mb-4"></div>
+	</div>
+      </section>
+
+      <section id="publicstudy">
+	<div class="section-header text-gray-700 leading-5">Public Study</div>
+	<div class="section-content-card">
+	  <div class="text-sm pb-2 text-gray-700 text-center"> This app has no public study yet
+	  </div>
+	  <div class="text-xs pb-4 text-gray-700 text-center"> add a public study  by changing it status to public in order to make it visible to public </div>
+	 
+	  <div class="mb-4"></div>
+	</div>
+      </section>
+
+
     </div>
     
     

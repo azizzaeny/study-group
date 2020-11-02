@@ -51,5 +51,12 @@ export function refer_docs(url: string): IHttpMessage {
   }
 }
 
+export function response(result){
+  if(result.error){
+    return failure(result.error, result.status);
+  }else{
+    return success(result.msg, result.value);
+  }
+}
 
 export type IResponse<T> = IResponseF<T> | IResponseS<T>| HttpException;

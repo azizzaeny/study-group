@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
-
+import { Observable } from "rxjs";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
-
+import { MemberService } from '../../services/user/member.service'
+;
+export class IUser{
+  email: string;
+  status: string;
+  first_name: string;
+  last_name: string;
+}
 
 @Component({
   selector: 'app-user-lists',
@@ -14,38 +21,33 @@ import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 })
 export class UserListsComponent implements OnInit {
 
-  users$;
-  users;
-  user = {
-    first_name: 'aziz',
-    last_name: 'zaeny',
-    email: 'aziz@gmail.com',
-    phone: '',
-    last_updated: '2 days ago',
-    created_at: '',
-    status: 'Active',
-    validated_email: '',
-    auth: {
-      password: '',
-      method: '',
-      roles: '',
-      verify_token: '',
-      reset_token: ''
-    },
-    profile_pic:{
-      url: 'https://github.com/me.jpg',
-      file_blob: ''
-    }
-  };  
+  users = this.userService.users$;
+  
   transition;
   faCheck=faCheck;
   faUserShield = faUserShield;
-  constructor(private router: Router, private authService: AuthService, private userService: UserService) {
-    this.users$ = this.userService.users$;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService,
+    private memberService: MemberService
+  ) {
+    
   }
 
-  ngOnInit(): void {
+  reloadData(){
+    this.userService.getUserLists()
+      .subscribe(function(data){
+	console.log(data);
+	this.users = data['value'];
+      });
+    
   }
+  ngOnInit(): void {
+    this.reloadData();
+  }
+  
   handleLogout(){
     this.authService.logout().subscribe(success =>{
       if(success){
@@ -54,8 +56,23 @@ export class UserListsComponent implements OnInit {
     });
   }
 
+  routeToAdd(e){
+    this.router.navigate(['dashboard','users', 'add']);
+  }
+
   trackByCardId(index, card){
     return card.email;
   }
-
+  
+  deleteUser(email){
+    this.userService.deleteUser(email).subscribe(success =>{
+      if(success){
+	this.reloadData();
+      }
+    });
+  }
+  
+  updateUser(email){
+    this.router.navigate(['dashboard','users', 'update']);
+  }
 }

@@ -25,6 +25,11 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  
+  handleViewUsers(e){
+    this.router.navigate(['dashboard','users'])
+  }
+  
   handleSecret(){    
     this.userService.getInitalSeeds().subscribe(data => {
       console.log('success recieved data');

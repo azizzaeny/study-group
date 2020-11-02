@@ -84,7 +84,7 @@ export function encode64(str: string):string{
 }
 
 export function decode64(str: string):string{
-  return urlsafe.decode(str);
+  return urlsafe.decode(str).toString();
 }
 
 export function signHash(str, salt){
@@ -153,9 +153,12 @@ export async function findById(
 export async function findEmailAndToken(
   doc: IUserModel,
   email: string,
-  token?: string
+  token: string
 ): Promise<any>{
-  const record = await doc.find({email: email, auth:{ verify_token: token}});
+  const record = await doc.findOne({
+    'email': email,
+    'auth.verify_token': token
+  });
   return record;
 }
 
@@ -181,43 +184,82 @@ export function updateLastTouch(
   return last;
 }
 
-export async function updatePassword(
-  doc: any, token, new_password):Promise<any>{
-  
-  let [email_token, hash, timestamp ] =  token.split('.');
-  let email = decode64(email_token);
-  let crypted_pass = generatePassword(new_password, pass_salt_rounds);
-  
-  let record = doc.findOneAndUpdate({email: email},{
-    $set:{ auth: {password: crypted_pass}
-	 }
-  });
 
+
+export async function updatePassword(
+  doc: any, email: string, new_password: string):Promise<any>{
+  
+  let crypted_pass = await generatePassword(new_password, pass_salt_rounds);
+  
+  let record = await doc.updateOne(
+    { email: email },
+    { $set:{ auth: { password: crypted_pass},
+	     last_updated: new Date(),
+	     reset_token: ''
+	   } });
+  
+  console.log(record);
+  
+  if(record.ok ==1){
+    return { email: email}
+  }else{
+    return false;
+  }
+}
+
+
+
+export async function findResetToken(doc: any, email, token){
+  let record = doc.findOne({
+    email: email,    
+    'auth.reset_token': token
+  });
   return record;
 }
+
 
 export async function updateVerifyToken(
   doc: any, email: string)
 : Promise<any>{
   const newToken = await generateEmailToken(email, user_salt);
-  return await doc.updateOne({ email: email, },
-			     { $set: { auth: {verify_token: newToken },
-				       last_updated: new Date(),
-				     }
-			     });  
+  let updated = await doc.updateOne(
+    { email: email, },
+    { $set: { auth: {verify_token: newToken },
+	      last_updated: new Date(),
+	    }
+    });
+
+  if(updated.ok == 1){
+    return { auth: {verify_token: newToken}, email: email };
+  }else{
+    return null;
+  }
 }
+
+
 
 export async function updateResetToken(
   doc: any,
   email: string
 ) : Promise<any> { 
   const newToken = await generateResetToken(email, user_salt);
-  return await doc.updateOne({email: email},{
+  const record =  await doc.updateOne({email: email},{
     $set: { auth : { reset_token: newToken },
 	    last_updated: new Date()
 	  }
   });
+  if(record.ok == 1){
+    return {
+      email: email,
+      auth:{
+	reset_token: newToken
+      }
+    }
+  }else{
+    return false;
+  }
 }
+
 
 export async function createUser(doc: any, isuer: any): Promise<any>{
   
@@ -257,20 +299,102 @@ export async function createUser(doc: any, isuer: any): Promise<any>{
   return created;
 }
 
-export async function activateUser(doc: any, email: string, token?: string){
+export async function activateUser(doc: any, email: string, token: string){
   
-  return await doc.updateOne({ email: email, },
-			     { $set: { auth: {verify_token:'' },
-				       last_updated: new Date(),
-				       status: 'active',
-				       validated_email: true
-				     }
-			     });
+  let record = await doc.updateOne(
+    { email: email, },
+    { $set: { auth: {verify_token:'' },
+	      
+	      last_updated: new Date(),
+	      status: 'active',
+	      validated_email: true
+	    }
+    });
+
+  if(record.ok == 1){
+    return {email: email, auth : {verify_token: token} , status: 'active'}
+  }else{
+    return false;
+  }
 }
 
+export async function updateProfilePicture(doc: any, email, profile){
+  let record = await doc.updateOne({
+    email: email
+  },{
+    $set:{
+      profile_pic :{
+	url: profile.pic_url,
+	last_updated: new Date()
+      }
+    }
+  });
+
+  if(record.ok ==1){
+    return { email: email}
+  }else{
+    return false;
+  }
+}
+
+export async function updateProfile(doc: any, email, profile){
+  let record  = await doc.updateOne({
+    email: email
+  },{
+    $set :{
+      first_name: profile.first_name,
+      last_name: profile.last_name,
+      phone: profile.phone,
+      last_updated: new Date()
+    }
+  });
+
+  if(record.ok == 1){
+    return { email: email }
+  }else{
+    return false;
+  }
+}
 
 export async function deleteUser(doc: any, id){
   return await doc.findOneAndDelete({_id: id});
 }
 
-export async function upsertUser(){};
+export async function deleteUserByEmail(doc, email){
+  return await doc.findOneAndDelete({ email: email});
+}
+
+export async function upsertUser(doc, profile){
+
+  let email = profile.email;
+  let password = await await generatePassword(profile.password, pass_salt_rounds);
+  
+  let user = await doc.findOneAndUpdate({
+    email: profile.email
+  },{
+    auth: {
+      password: password,
+      method: profile.method,
+      roles: profile.roles,
+      verify_token: '',
+      reset_token: ''
+    },
+    email: profile.email,
+    last_updated: new Date(),
+    created_at: new Date(),
+    status: profile.status,
+    validated_email: profile.validated_email,
+    first_name: profile.first_name,
+    last_name: profile.last_name,
+    phone: profile.phone,    
+  }, {
+    upsert: true
+  });
+  
+  if(user){
+    return {  email: user.email  }
+  }else{
+    false;
+  }
+ 
+};

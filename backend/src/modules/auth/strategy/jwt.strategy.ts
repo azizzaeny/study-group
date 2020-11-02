@@ -1,4 +1,4 @@
-
+import * as passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from 'src/modules/auth/jwt.service';
@@ -8,24 +8,25 @@ import config from 'src/config';
 const conf = config();
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy){
-  
+export class JwtStrategy extends PassportStrategy(Strategy){  
   constructor(
-    
     private readonly jwtService: JwtService){
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),                                    
-      passReqToCallback: true,                                                                     
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      passReqToCallback: true,                           
       secretOrKey: conf.jwt.salt,        
+    }, async (req, payload, next)=>{
+      this.verify(req, payload, next);
     });
+    passport.use(this);
   }
 
-  public async validate(payload: any, req: any, done: Function){
-    const user = await this.jwtService.verifyUser(req);
-    console.log('who', user);
+  public async verify(payload: object, req, done){    
+    const user = await this.jwtService.verifyUser(payload);
     if(!user){
-      return done(new UnauthorizedException(), false);
+      return done('unauthorized Request', false);
+    }else{
+      return done(null, payload);
     }
-    done(null, user);
   }
 }

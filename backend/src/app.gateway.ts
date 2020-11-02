@@ -4,6 +4,8 @@ import {
   WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  SubscribeMessage,
+  WsResponse, WsException
 } from '@nestjs/websockets';
 
 @WebSocketGateway(4001, { transport: ['websocket'] })
@@ -20,5 +22,13 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   handleDisconnect(client) {
     this.logger.log('Client disconnected');
+  }
+
+  @SubscribeMessage('first_message')
+  handleMessage(client, msg): WsResponse {
+    let event = 'first_message';
+    let response = 'message recieved';
+    console.log(msg);
+    return { event, data: response}
   }
 }

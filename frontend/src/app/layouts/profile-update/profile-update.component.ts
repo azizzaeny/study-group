@@ -75,14 +75,29 @@ export class ProfileUpdateComponent implements OnInit {
 
   handleUpdateAuth(e){
     e.preventDefault();
+    let formRequest = Object.assign(this.authForm.value, {});
+    this.userService.updateAuthProfile(formRequest)
+      .subscribe(res =>{
+	console.log(res);
+      });
   }
 
   handleUpdateProfile(e){
     e.preventDefault();
+    
+    let formRequest = Object.assign(this.updateForm.value, {});
+    this.userService.updateProfile(formRequest).subscribe(res =>{
+      console.log(res);
+      });
+    
   }
 
   handleUpdatePic(e){
     e.preventDefault();
+    let formRequest = Object.assign(this.updateForm.value, {});
+    this.userService.updateProfilePic(formRequest).subscribe(res =>{
+      console.log(res);
+    });
   }
 
   navigateTo(url, delay){

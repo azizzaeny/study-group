@@ -13,9 +13,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     CommonModule,
     HttpClientModule
   ],
-  providers:[AuthGuard, AuthService, DashboardGuard,{
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor
-  }]
+  providers:[AuthGuard,
+	     AuthService, DashboardGuard,
+	     {
+	       provide: HTTP_INTERCEPTORS,
+	       useClass: TokenInterceptor
+	     }
+	    ]
 })
   export class AuthModule { }

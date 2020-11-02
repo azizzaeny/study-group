@@ -14,12 +14,14 @@
 	  <h2 class="text-2xl tracking-wide font-thin leading-snug pt-8 pb-4 violet-dark-s"> Request Reset Password</h2>
 
 
-	  <div class="mx-10 my-8">
-	    <app-banner title="Succss" text="Check your inbox for the next steps. If you don't receive an email, and it's not in your spam folder this could mean you signed up with a different address"></app-banner>
+	  <div class="mx-10 my-8" *ngIf="message">
+	    <app-banner title="Succss" [text]="message">
+	      <a *ngIf="token_link" [href]="token_link" style="color:red;"> verify </a>
+	    </app-banner>
 	   </div>
 	    
 	    
-	  <form action="/api/auth/reset-password" class="mx-10" method="post" role="form">
+	  <form [formGroup]="requestPassForm" (ngSubmit)="handleRequestResetPass($event)" class="mx-10" role="form">
 	    <input name="_csrf" type="hidden" value="">
 	    <p class="overview text-sm pb-4 text-gray-800 text-left">Enter your email address below and we'll send you a link to reset your password.</p>
 
@@ -29,7 +31,7 @@
 	      <div class="input-icon icon-username">
 		<fa-icon [icon]="faUser" [classes]="['violet-s']"></fa-icon>
 	      </div>	      
-	      <input autofocus="true" class="form-control" id="email" name="email" placeholder="Email address" type="email">
+	      <input autofocus="true" class="form-control" id="email" name="email" placeholder="Email address" type="email" formControlName="email">
 	    </div>
 
 	    <div class="pb-8">

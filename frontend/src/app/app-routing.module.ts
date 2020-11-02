@@ -12,23 +12,30 @@ import { SignupComponent } from './layouts/signup/signup.component';
 import { UserListsComponent} from './layouts/user-lists/user-lists.component';
 import { SignupConfirmComponent } from './layouts/signup-confirm/signup-confirm.component';
 import { ViewEmailComponent } from './layouts/view-email/view-email.component';
-import {AuthGuard} from './services/auth/auth.guard';
-import {AdminGuard} from './services/auth/admin.guard';
-import {MemberGuard} from './services/auth/member.guard';
+import { UserAddComponent } from './layouts/user-add/user-add.component';
+import { UserUpdateComponent } from './layouts/user-update/user-update.component';
+import {UserDeleteConfirmComponent} from './layouts/user-delete-confirm/user-delete-confirm.component';
+
+import { AuthGuard } from './services/auth/auth.guard';
+import { AdminGuard } from './services/auth/admin.guard';
+import { MemberGuard } from './services/auth/member.guard';
 
 
 const routes: Routes = [
- 
+  
   // Guard public when Logged in
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard]}, 
   { path: 'request-password', component: RequestPassComponent, canActivate:[AuthGuard] },
-  { path: 'reset-password', component: ResetPassComponent, canActivate:[AuthGuard] },
+  { path: 'reset-password/:token', component: ResetPassComponent, canActivate:[AuthGuard] },
   { path: 'signup', component: SignupComponent, canActivate:[AuthGuard]},
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   // Guard to 404 when not logged In
   { path: 'dashboard', component: DashboardComponent, canActivate:[AdminGuard]},
   { path: 'dashboard/users', component: UserListsComponent, canActivate:[AdminGuard]},
+  { path: 'dashboard/users/add', component: UserAddComponent, canActivate:[AdminGuard] },
+  { path: 'dashboard/users/update/:email', component: UserUpdateComponent, canActivate:[AdminGuard]},
+  { path: 'dashboard/users/delete/:email', component: UserDeleteConfirmComponent, canActivate:[AdminGuard]},
   // guard member area 
   { path: 'dashboard/profile', component: ProfileComponent, canActivate: [MemberGuard],  },
   { path: 'dashboard/profile/update', component: ProfileUpdateComponent, canActivate:[MemberGuard] },

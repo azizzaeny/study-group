@@ -1,0 +1,116 @@
+
+<div class="dashboard-container animate__animated animate__faster p-0 w-full min-h-full" [ngClass]="transition">
+  <div class="nav">
+    <nav class="dashheader">
+      <div class="header-container max-w-3xl mx-auto px-4">
+	<div class="flex flex-row items-center justify-between">
+
+	  <div class="relative pt-2">
+	
+	    <a href="/dashboard/profile" class="">      
+	      <app-logo svgStyle="fill-white size-28" labelStyle="text-white tracking-wide font-bold text-xs uppercase"></app-logo>
+	    </a>
+	    <app-badge label="member"></app-badge>
+	  </div>
+	  
+	  
+	  <div class="pt-2">
+	    <button class="button-logout" (click)="handleLogout()">Logout </button>
+	  </div>
+	</div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="dashboard-boady-container">
+
+    <div class="dashboard-subnav">
+      <div class="flex flex-row px-8 max-w-3xl mx-auto">
+	<a class="child-nav" href="/dashboard/users">Users</a>
+	<a class="child-nav" href="/dashboard/profile">Study</a>
+      </div>
+    </div>    
+    
+    <div class="main-content max-w-3xl mx-auto px-4 flex flex-col">
+      <div class="mt-8">
+	<h2 class="text-3xl text-purple-900 font-thin">Update User</h2>
+      </div>
+      
+      <div class="mt-2">
+
+	<h3 class="text-xs text-gray-700 font-bold tracking-wider mb-2 uppercase">User Profile</h3>
+
+	
+	<form class="" [formGroup]="updateUserForm" (ngSubmit)="handleUpdateUser($event)">
+	  <div class="input-group mb-4">
+	    <label for="first_name">
+	      First Name <sup class="text-red-900" title="required">*</sup>
+	    </label>
+	    <input type="text" name="first_name" id="first_name" value="" class="required" autocapitalize="off" autofocus="autofocus" placeholder="First name" required="true" aria-required="true" formControlName="first_name">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="last_name">
+	      Last Name
+	    </label>
+	    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" autocapitalize="off" formControlName="last_name">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="email"> Email address <sup class="text-red-900" title="Required">*</sup></label>
+	    <input type="email" name="email" id="email" value="" class="required" autocapitalize="off" placeholder="Email address" formControlName="email" disbled="true">
+	  </div>
+
+	  <div class="input-group mb-4">
+	    <label for="phone"> Phone Number <sup class="text-red-900" title="Required">*</sup> </label>
+	    <input type="number" name="phone" id="phone" value="" placeholder="Phone Number" formControlName="phone">
+	  </div>
+
+	  
+	  <div class="input-group mb-4">
+	    <label for="password"> Password </label>
+	    <input type="password" name="password" id="password" value="" placeholder="Password" required="true" aria-required="true" formControlName="password">
+	  </div>
+
+	  
+	  <div class="input-group mb-4">  
+	    <label for="pic_url"> picture </label>
+	    <input type="file" name="pic_url" id="pic_url" value="" placeholder="" formControlName="pic_url">  
+	  </div>
+
+	  	  
+	  <div class="input-group mb-4">  
+	    <label for="validated_email"> valid email </label>
+	    <input type="text" name="validated_email" id="validated_email" value="" placeholder="" formControlName="validated_email">  
+	  </div>
+	  
+ 	  <div class="input-group mb-4">  
+	    <label for="roles"> roles </label>
+	    <input type="text" name="roles" id="roles" value="" placeholder="" formControlName="roles"> 
+	  </div>
+
+	  
+	  <div class="input-group mb-4">  
+	    <label for="method"> method </label>
+	    <input type="text" name="method" id="metthod" value="" placeholder="" formControlName="method">  
+	  </div>
+	  <div class="mt-4 mb-2"> 
+	    <app-button label="Update User" type="button-login-primary" moreClass="uppercase font-extrabold tracking-wider override-fs-size" (buttonClick)="handleUpdateUser($event)"></app-button>    
+	  </div>
+	  
+	</form>
+	
+	  <div class="mt-4 mb-24">
+	    <hr class="inset-hr">
+	  </div>	  
+	  	  
+      </div>
+      
+      
+    </div>
+    
+    
+  <div class="modal-overlay"></div>
+  <div class="loading-indicator"></div>
+
+</div>
